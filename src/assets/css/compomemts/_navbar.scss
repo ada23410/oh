@@ -4,9 +4,11 @@ nav {
     .base-menu{
         display: flex;
         align-items: center;
+        background: transparent;
+        border: transparent;
         .menu-icon{
-            width: 55px;
-            height: 55px;
+            width: 50px;
+            height: 50px;
             border-radius: 50px;
             border: 2px solid $blue;
             background: $white;
@@ -50,6 +52,77 @@ nav {
             text-align: center;
             position: relative;
             overflow: hidden;
+        }
+    }
+}
+
+.hidden {
+    display: none !important;
+}
+.show {
+    display: block !important;
+    transform: translateX(0) !important;
+    opacity: 1 !important;
+}
+.side-bar-menu {
+    transform: translateX(-100%);
+    transition: transform 0.5s ease-in-out;
+    width: 100vw;
+    height: 100vh;
+    position: fixed; 
+    top: 0;
+    left: 0; 
+    display: flex;
+    .menu-list{
+        width: 100%;
+        height: 100%;
+        background-color: $blue;
+        .base-menu{
+            display: flex;
+            align-items: center;
+            padding: 8px 6px;
+            background-color: transparent;
+            border: transparent;
+            .menu-icon{
+                width: 50px;
+                height: 50px;
+                border-radius: 50px;
+                border: 2px solid $blue;
+                background: $white;
+                position: relative;
+                overflow: hidden;
+                .bars{
+                    font-size: 21px;
+                    font-weight: $font-weight-medium;
+                    color: $blue;
+                    position: absolute;
+                    top: 50%;
+                    left: 50%;
+                    transform: translate(-50%, -50%);
+                }
+            }
+            .menu{
+                font-size: 21px;
+                font-weight: $font-weight-medium;
+                color: $white;
+                margin-left: 0.5rem;
+            }
+        }
+        .list{
+            text-align: center;
+            .navbar-nav{
+                .nav-item{
+                    padding: 2rem 0;
+                    .nav-link{
+                        font-size: 21px;
+                        color: $white;
+                        .arrow{
+                            font-size: 16px;
+                            color: $white;
+                        }
+                    }
+                }
+            }
         }
     }
 }

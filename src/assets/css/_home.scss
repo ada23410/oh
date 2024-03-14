@@ -1,0 +1,17 @@
+.main{
+    .recommend{
+        .marquee{
+            border-top:2px solid $blue;
+            border-bottom:1.5px solid $blue;
+            padding: 1rem 0;
+            .marquee-item{
+                .item{
+                    font-size: 21px;
+                    font-weight: $font-weight-semibold;
+                    margin-right: 1rem;
+                    width: 100%;
+                }
+            }
+        }
+    }
+}
