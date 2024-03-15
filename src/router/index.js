@@ -21,11 +21,17 @@ const routes = [
   },
   {
     path: '/dashboard',
-    component: () => import('../views/Dashboard.vue')
+    component: () => import('../views/Dashboard.vue'),
+    children: [
+      {
+        path: 'products',
+        component: () => import('../views/Products.vue')
+      }
+    ]
   },
   {
     path: '/home',
-    component: () => import('../views/Homw.vue')
+    component: () => import('../views/Home.vue')
   }
 ]
 

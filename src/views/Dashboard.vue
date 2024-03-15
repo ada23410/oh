@@ -1,13 +1,14 @@
 <!-- eslint-disable vue/multi-word-component-names -->
 <template>
-    Dashboard
+    <NavbarDashboard></NavbarDashboard>
+    <router-view/>
 </template>
 
 <script>
 import NavbarDashboard from '../components/NavbarDashboard.vue'
 
 export default {
-  component: {
+  components: {
     NavbarDashboard
   },
   created () {
