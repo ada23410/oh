@@ -1,4 +1,5 @@
 <template>
+    <Loading :active="isLoading"></Loading>
     <nav class="navbar navbar-expand-lg bg-body-tertiary">
         <div class="container-fluid">
             <a class="navbar-brand" href="#">Dashboard</a>
@@ -27,13 +28,22 @@
 
 <script>
 export default {
+  data () {
+    return {
+      isLoading: false
+    }
+  },
   methods: {
     logout () {
       const api = `${process.env.VUE_APP_API}logout`
+      this.isLoading = true
       // console.log(api)
       this.$http.post(api, this.user).then((res) => {
-        console.log(res)
-        this.$router.push('/login')
+        this.isLoading = false
+        // console.log(res)
+        if (res.data.success) {
+          this.$router.push('/login')
+        }
       })
     }
   }

@@ -1,5 +1,6 @@
 <!-- eslint-disable vue/multi-word-component-names -->
 <template>
+    <Loading :active="isLoading"></Loading>
     <div class="container mt-5">
         <form class="row justify-content-center" @submit.prevent="signIn">
             <div class="col-md-6">
@@ -41,14 +42,17 @@ export default {
     return {
       user: {
         username: '',
-        password: ''
+        password: '',
+        isLoading: false
       }
     }
   },
   methods: {
     signIn () {
       const api = `${process.env.VUE_APP_API}admin/signin`
+      this.isLoading = true
       this.$http.post(api, this.user).then((res) => {
+        this.isLoading = false
         // console.log(res)
         if (res.data.success) {
           const { token, expired } = res.data

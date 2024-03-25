@@ -1,5 +1,6 @@
 <!-- eslint-disable vue/multi-word-component-names -->
 <template>
+    <Loading :active="isLoading"></Loading>
     <div class="text-end mt-3">
         <button class="btn btn-primary" type="button" @click="openModal(true)">增加一個產品</button>
     </div>
@@ -37,12 +38,14 @@
             </tr>
         </tbody>
     </table>
+    <Pagination :pages="pagination" @emit-pages="getProducts"></Pagination>
     <ProductModal ref="productModal" :product="tempProduct" @update-product="updateProduct"></ProductModal>
     <DeleteProductModal ref="deleteProductModal" :product="tempProduct" @confirm-delete="confirmDelete"></DeleteProductModal>
 </template>
 
 <script>
 import ProductModal from '../components/ProductModal.vue'
+import Pagination from '@/components/Pagination.vue'
 import DeleteProductModal from '../components/DeleteModal.vue'
 
 export default ({
@@ -51,22 +54,28 @@ export default ({
       products: [],
       pagination: {},
       tempProduct: {},
-      isNew: false
+      isNew: false,
+      isLoading: false
     }
   },
   components: {
     ProductModal,
-    DeleteProductModal
+    DeleteProductModal,
+    Pagination
   },
   inject: ['emitter'],
   methods: {
-    getProducts () {
-      const api = `${process.env.VUE_APP_API}api/${process.env.VUE_APP_PATH}/admin/products`
+    getProducts (page = 1) {
+      const api = `${process.env.VUE_APP_API}api/${process.env.VUE_APP_PATH}/admin/products/?page=${page}`
+      this.isLoading = true
       this.$http.get(api).then((res) => {
+        this.isLoading = false
         if (res.data.success) {
         //   console.log(res.data)
           this.products = res.data.products
           this.pagination = res.data.pagination
+          this.has_next = res.data.has_next
+          this.has_pre = res.data.has_pre
         }
       })
     },
@@ -100,11 +109,23 @@ export default ({
       }
 
       const productComponent = this.$refs.productModal
+      this.isLoading = true
       this.$http[httpMethod](api, { data: this.tempProduct }).then((res) => {
+        this.isLoading = false
+        productComponent.hideModal()
         if (res.data.success) {
         //   console.log(res.data)
-          productComponent.hideModal()
           this.getProducts()
+          this.emitter.emit('push-message', {
+            style: 'success',
+            title: '更新成功'
+          })
+        } else {
+          this.emitter.emit('push-message', {
+            style: 'danger',
+            title: '更新失敗',
+            content: res.data.message.join('、')
+          })
         }
       })
     },
