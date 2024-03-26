@@ -123,7 +123,7 @@ export default ({
       isPaid: false
     }
   },
-  emits: ['update-product'],
+  emits: ['update-order'],
   mixins: [modalMixin],
   inject: ['emitter'],
   watch: {

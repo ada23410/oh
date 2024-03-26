@@ -32,7 +32,7 @@
                     <div class="form-check form-switch">
                         <input class="form-check-input" type="checkbox" :id="`paidSwitch${item.id}`"
                                 v-model="item.is_paid"
-                                @change="updatePaid(item)">
+                                @change="updateOrder(item)">
                         <label class="form-check-label" :for="`paidSwitch${item.id}`">
                             <span v-if="item.is_paid">已付款</span>
                             <span v-else>未付款</span>
@@ -48,7 +48,7 @@
             </tr>
         </tbody>
     </table>
-    <pagination  :pages="pagination" @emit-pages="getProducts"></pagination>
+    <pagination  :pages="pagination" @emit-pages="getOrders"></pagination>
     <orderModal ref="orderModal" :order="tempOrder" @update-order="updateOrder"></orderModal>
     <deleteOrderModal ref="deleteOrderModal" :order="tempOrder" @confirm-delete="deleteOrder"></deleteOrderModal>
 </template>
@@ -110,8 +110,11 @@ export default ({
         is_paid: item.is_paid
       }
       this.isLoading = true
+      const orderComponent = this.$refs.orderModal
       this.$http.put(api, { data: paid }).then((res) => {
+        console.log(res.data)
         this.isLoading = false
+        orderComponent.hideModal()
         this.getOrders(this.currentPage)
         this.$httpMessageState(res, '更新付款狀態')
       })
