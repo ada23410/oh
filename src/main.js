@@ -1,7 +1,5 @@
 /* eslint-disable vue/multi-word-component-names */
 import { createApp } from 'vue'
-import App from './App.vue'
-import router from './router'
 import axios from 'axios'
 import VueAxios from 'vue-axios'
 import { library } from '@fortawesome/fontawesome-svg-core'
@@ -13,6 +11,10 @@ import Loading from 'vue3-loading-overlay'
 // Import stylesheet
 import 'vue3-loading-overlay/dist/vue3-loading-overlay.css'
 
+import App from './App.vue'
+import router from './router'
+import { currency } from './methods/filter'
+
 library.add(fas)
 
 const app = createApp(App)
@@ -20,6 +22,9 @@ const app = createApp(App)
 app.component('font-awesome-icon', FontAwesomeIcon)
 
 app.config.productionTip = false
+app.config.globalProperties.$filters = {
+  currency
+}
 
 app.use(VueAxios, axios)
 app.use(router)
