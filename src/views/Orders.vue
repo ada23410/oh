@@ -48,7 +48,7 @@
             </tr>
         </tbody>
     </table>
-    <pagination  :pages="pagination" @emit-pages="getOrders"></pagination>
+    <pagination :pages="pagination" @emit-pages="getOrders"></pagination>
     <orderModal ref="orderModal" :order="tempOrder" @update-order="updateOrder"></orderModal>
     <deleteOrderModal ref="deleteOrderModal" :order="tempOrder" @confirm-delete="deleteOrder"></deleteOrderModal>
 </template>
