@@ -1,6 +1,6 @@
 <!-- eslint-disable vue/multi-word-component-names -->
 <template>
-     <div class="toast" role="alert" aria-live="assertive" aria-atomic="true" ref="toast">
+    <div class="toast" role="alert" aria-live="assertive" aria-atomic="true" ref="toast">
         <div class="toast-header">
             <span :class="`bg-${msg.style}`" class="p-2 rounded me-2 d-inline-block"></span>
                 <strong class="me-auto">{{ msg.title }}</strong>

@@ -80,7 +80,7 @@ export default ({
       })
     },
     openModal (isNew, item) {
-      console.log(isNew, item)
+      // console.log(isNew, item)
       if (isNew) {
         this.tempProduct = {}
       } else {

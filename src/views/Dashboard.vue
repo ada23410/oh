@@ -1,16 +1,21 @@
 <!-- eslint-disable vue/multi-word-component-names -->
 <template>
     <NavbarDashboard></NavbarDashboard>
-    <router-view/>
+      <div class="container-fluid mt-3 position-relative">
+        <ToastMessage></ToastMessage>
+        <router-view/>
+      </div>
 </template>
 
 <script>
 import emitter from '@/methods/emitter'
+import ToastMessage from '@/components/ToastMessage.vue'
 import NavbarDashboard from '../components/NavbarDashboard.vue'
 
 export default {
   components: {
-    NavbarDashboard
+    NavbarDashboard,
+    ToastMessage
   },
   provide () {
     return {
