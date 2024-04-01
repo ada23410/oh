@@ -14,31 +14,31 @@
             <div class="modal-body">
             <div class="row">
                 <div class="col-sm-4">
-                <div class="mb-3">
-                    <label for="image" class="form-label">輸入圖片網址</label>
-                    <input type="text" class="form-control" id="image" placeholder="請輸入圖片連結" v-model="tempProduct.imageUrl">
-                </div>
-                <div class="mb-3">
-                    <label for="customFile" class="form-label">或 上傳圖片
-                    <i class="fas fa-spinner fa-spin"></i>
-                    </label>
-                    <input type="file" id="customFile" class="form-control" ref="fileInput" @change="uploadFile">
-                </div>
-                <img class="img-fluid" :src="tempProduct.imageUrl" alt="">
+                  <div class="mb-3">
+                      <label for="image" class="form-label">輸入圖片網址</label>
+                      <input type="text" class="form-control" id="image" placeholder="請輸入圖片連結" v-model="tempProduct.imageUrl">
+                  </div>
+                  <div class="mb-3">
+                      <label for="customFile" class="form-label">或 上傳圖片
+                      <i class="fas fa-spinner fa-spin"></i>
+                      </label>
+                      <input type="file" id="customFile" class="form-control" ref="fileInput" @change="uploadFile">
+                  </div>
+                  <img class="img-fluid" :src="tempProduct.imageUrl" alt="">
                 <!-- 延伸技巧，多圖 -->
-                <div class="mt-5" v-if="tempProduct.images">
-                    <div class="mb-3 input-group" v-for="(image, key) in tempProduct.images" :key="key">
-                        <input type="url" class="form-control form-control" placeholder="請輸入連結" v-model="tempProduct.images[key]">
-                        <button type="button" class="btn btn-outline-danger" @click="tempProduct.images.splice(key, 1)">
-                            移除
-                        </button>
-                    </div>
-                    <div v-if="tempProduct.images[tempProduct.images.length - 1] || !tempProduct.images.length">
-                        <button class="btn btn-outline-primary btn-sm d-block w-100" @click="tempProduct.images.push('')">
-                            新增圖片
-                        </button>
-                    </div>
-                </div>
+                  <div class="mt-5" v-if="tempProduct.images">
+                      <div class="mb-3 input-group" v-for="(image, key) in tempProduct.images" :key="key">
+                          <input type="url" class="form-control form-control" placeholder="請輸入連結" v-model="tempProduct.images[key]">
+                          <button type="button" class="btn btn-outline-danger" @click="tempProduct.images.splice(key, 1)">
+                              移除
+                          </button>
+                      </div>
+                      <div v-if="tempProduct.images[tempProduct.images.length - 1] || !tempProduct.images.length">
+                          <button class="btn btn-outline-primary btn-sm d-block w-100" @click="tempProduct.images.push('')">
+                              新增圖片
+                          </button>
+                      </div>
+                  </div>
                 </div>
                 <div class="col-sm-8">
                 <div class="mb-3">
