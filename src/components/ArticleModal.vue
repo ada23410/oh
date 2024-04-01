@@ -47,7 +47,7 @@
                     <div class="mb-3">
                         <label for="tag" class="form-label">分類</label>
                         <textarea type="text" class="form-control" id="tag" v-model="tempArticle.tag"
-                            placeholder="請輸入關鍵字"></textarea>
+                            placeholder="請輸入關鍵字" rows="10" cols="50"></textarea>
                     </div>
                     <div class="mb-3">
                         <label for="create_at">建立日期</label>
@@ -97,15 +97,14 @@ export default ({
   },
   methods: {
     updateCreateAt () {
-      // 将日期字符串转换为 UNIX 时间戳
       this.tempArticle.create_at = Math.floor(new Date(this.tempArticle.create_at).getTime() / 1000)
     }
   },
   data () {
     return {
       tempArticle: {
-        create_at: '', // 初始化为字符串
-        isPublic: false // 初始化为布尔值
+        create_at: '',
+        isPublic: false
       }
     }
   },
