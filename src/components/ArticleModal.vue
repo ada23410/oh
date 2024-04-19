@@ -47,18 +47,16 @@
                     <div class="mb-3">
                         <label for="tag" class="form-label">分類</label>
                         <textarea type="text" class="form-control" id="tag" v-model="tempArticle.tag"
-                            placeholder="請輸入關鍵字" rows="10" cols="50"></textarea>
+                            placeholder="請輸入關鍵字" rows="10" cols="30"></textarea>
                     </div>
                     <div class="mb-3">
                         <label for="create_at">建立日期</label>
                         <input type="date" class="form-control" id="create_at"
-                            v-model="tempArticle.create_at" @input="updateCreateAt">
+                            v-model="tempArticle.create_at" @change="convertDate">
                     </div>
                     <div class="mb-3">
                         <div class="form-check">
                         <input class="form-check-input" type="checkbox"
-                                :true-value="1"
-                                :false-value="0"
                                 v-model="tempArticle.isPublic" id="isPublic">
                         <label class="form-check-label" for="isPublic">
                             是否啟用
@@ -71,7 +69,7 @@
         <div class="modal-footer">
           <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">取消</button>
           <button type="button" class="btn btn-primary"
-                  @click="$emit('update-article', tempArticle)">確認
+              @click="convertDate; $emit('update-article', tempArticle)">確認
           </button>
         </div>
       </div>
@@ -95,17 +93,17 @@ export default ({
       this.tempArticle = this.article
     }
   },
-  methods: {
-    updateCreateAt () {
-      this.tempArticle.create_at = Math.floor(new Date(this.tempArticle.create_at).getTime() / 1000)
-    }
-  },
   data () {
     return {
       tempArticle: {
-        create_at: '',
+        create_at: 0,
         isPublic: false
       }
+    }
+  },
+  methods: {
+    convertDate () {
+      this.tempArticle.create_at = Math.floor(new Date(this.tempArticle.create_at) / 1000)
     }
   },
   mixins: [modalMixin],

@@ -62,14 +62,13 @@ export default ({
     getArticles () {
       const api = `${process.env.VUE_APP_API}api/${process.env.VUE_APP_PATH}/admin/articles`
       this.$http.get(api).then((res) => {
-        // console.log(res.data)
+        console.log(res.data)
         this.articles = res.data.articles
         this.pagination = res.data.pagination
       })
     },
     openModal (isNew, item) {
       this.isNew = isNew
-      console.log(this.isNew)
       if (this.isNew) {
         this.tempArticle = {}
       } else {
@@ -84,11 +83,12 @@ export default ({
       deleteArticleComponent.showModal()
     },
     updateArticle (tempArticle) {
+      console.log(tempArticle)
       if (this.isNew) {
         const api = `${process.env.VUE_APP_API}api/${process.env.VUE_APP_PATH}/admin/article`
         const articleComponent = this.$refs.articleModal
         this.$http.post(api, { data: tempArticle }).then((res) => {
-          // console.log(res.data)
+          console.log('新增文章', res.data)
           this.$httpMessageState(res, '新增文章')
           this.getArticles()
           articleComponent.hideModal()
@@ -97,7 +97,7 @@ export default ({
         const api = `${process.env.VUE_APP_API}api/${process.env.VUE_APP_PATH}/admin/article/${this.tempArticle.id}`
         const articleComponent = this.$refs.articleModal
         this.$http.put(api, { data: tempArticle }).then((res) => {
-          // console.log(res.data)
+          console.log('更新文章', res.data)
           this.$httpMessageState(res, '更新文章')
           this.getArticles()
           articleComponent.hideModal()
