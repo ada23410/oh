@@ -56,7 +56,7 @@ export default {
         // console.log(res)
         if (res.data.success) {
           const { token, expired } = res.data
-          // console.log(token, expired)
+          console.log(token, expired)
           document.cookie = `Hexuid=hexToken${token}; expires=${new Date(expired).toUTCString()}; path=/`
           this.$router.push('/dashboard/products')
         }

@@ -30,7 +30,7 @@ export default {
     this.$http.post(api, this.user).then((res) => {
       console.log(res)
       if (!res.data.success) {
-        this.$router.push('login')
+        this.$router.push('/login')
       }
     })
   }
