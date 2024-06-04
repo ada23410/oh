@@ -60,12 +60,72 @@
         </div>
     </div>
     <div class="about-us mt-5">
-      <div class="about-section">
-        <div class="container">
-          <h5>ABOUT US</h5>
+      <div class="container">
+        <div class="about-section">
+          <div class="about-us-title">
+            <h5>ABOUT US</h5>
+          </div>
+          <div class="about-us-content">
+            <h6 class="tag">#樂活飲食精選</h6>
+            <h3 class="title">oh~賣蔬果店</h3>
+            <div class="content">
+              <p>專門銷售各種飲料（如手工啤酒、精釀咖啡、茶飲等）和醃漬物（如醃黃瓜pickles、橄欖black olives、泡菜kimchi等）。這些產品既可獨立享用，也可作為搭配美食的佳品。</p>
+            </div>
+            <a class="call-to-action">
+              查看資訊
+              <font-awesome-icon class="bars" icon="fas fa-arrow-right"/>
+            </a>
+          </div>
         </div>
       </div>
       <div class="about-cover"></div>
+    </div>
+    <div class="topics mt-5">
+      <div class="container">
+        <div class="topics-section">
+          <div class="topics-title">
+            <h5>TOPICS</h5>
+          </div>
+          <div class="topics-content">
+            <swiper class="mySwiper" :modules="modules"
+                  :slidesPerView="'auto'"
+                  navigation
+                  :pagination="{ clickable: true }"
+                  :scrollbar="{ draggable: true }"
+                  :breakpoints="{
+                    '320': {
+                      slidesPerView: 1,
+                      spaceBetween: 20,
+                    },
+                    '540': {
+                      slidesPerView: 1,
+                      spaceBetween: 20,
+                    },
+                    '768': {
+                      slidesPerView: 2,
+                      spaceBetween: 40,
+                    },
+                    '1124': {
+                      slidesPerView: 4,
+                      spaceBetween: 30,
+                    },
+                  }"
+                  @swiper="onSwiper"
+                  @slideChange="onSlideChange">
+                  <swiper-slide v-for="item in articles" :key="item.id">
+                    <div class="card">
+                      <div class="card-img-top rounded border-0" style="height: 300px; background-size: cover; background-position: center;border-radius: 0;" :style="{backgroundImage: `url(${item.imageUrl})`}"></div>
+                      <div class="card-body">
+                        <h5 class="card-title">{{ item.title }}</h5>
+                        <p class="card-text">{{ item.description }}</p>
+                        <span class="tag">{{ item.tag }}</span>
+                      </div>
+                    </div>
+                  </swiper-slide>
+              </swiper>
+          </div>
+        </div>
+      </div>
     </div>
 </template>
 
@@ -88,7 +148,8 @@ export default ({
       onSwiper: null,
       onSlideChange: null,
       products: [],
-      pagination: {}
+      pagination: {},
+      articles: []
     }
   },
   methods: {
@@ -125,10 +186,18 @@ export default ({
         // console.log(res.data)
         this.products = res.data.products
       })
+    },
+    getArticles () {
+      const api = `${process.env.VUE_APP_API}api/${process.env.VUE_APP_PATH}/articles`
+      this.$http.get(api).then((res) => {
+        console.log(res.data.articles)
+        this.articles = res.data.articles
+      })
     }
   },
   created () {
     this.getProducts()
+    this.getArticles()
   }
 })
 </script>

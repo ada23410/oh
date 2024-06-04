@@ -68,6 +68,53 @@
     position: relative;
     .about-section{
         position: absolute;
+        width: 75%;
+        z-index: 10;
+        .about-us-title{
+            border-bottom:1.5px solid $white;
+            padding: 2rem 0 1rem 0;
+            h5{
+                color: $white;
+            }
+        }
+        .about-us-content{
+            margin-top:  20rem;
+            width: 25%;
+            .tag{
+                color: $white;
+                font-size: .8rem;
+                font-weight: 400;
+                margin-bottom: 1rem;
+                border: .5px solid $white;
+                display: inline-block;
+                padding: .5rem;
+            }
+            .title{
+                color: $white;
+                font-size: 2rem;
+                font-weight: 500;
+                letter-spacing: .1rem;
+                margin-bottom: 1rem;
+            }
+            .content{
+                color: $white;
+                font-size: .8rem;
+                font-weight: 300;
+                text-align: justify;
+                letter-spacing: .1rem;
+                line-height: 1.5rem;
+                margin-bottom: 1rem;
+            }
+            .call-to-action{
+                color: $white;
+                font-size: 1rem;
+                text-decoration: none;
+                background-color: $blue;
+                display: block;
+                text-align: center;
+                padding: 1rem;
+            }
+        }
     }
     .about-cover{
         width: 100%;
@@ -88,5 +135,66 @@
         mix-blend-mode: multiply;
         border: none;
         border-radius: 5px;
+    }
+}
+.topics{
+    height: 80vh;
+    width: 100%;
+    pointer-events: none;
+    .topics-section{
+        .topics-title{
+            border-bottom:1.5px solid $blue;
+            padding: 1rem 0;
+            h5{
+                color: $blue;
+            }
+        }
+        .topics-content{
+            margin-top:  5rem;
+            .card{
+                border: none;
+                position: relative;
+                .card-img-top {
+                    position: relative;
+                    display: inline-block;
+                }
+                .card-img-top::after {
+                    content: '';
+                    position: absolute;
+                    top: 0;
+                    right: 0;
+                    bottom: 0;
+                    left: 0;
+                    background: rgba(181, 181, 181, 0.5); 
+                    mix-blend-mode: multiply;
+                    border: none;
+                    border-radius: 5px;
+                }
+                .card-body{
+                    padding: 1rem 0;
+                    .card-title{
+                        font-size: 1.2rem;
+                        font-weight: 500;
+                        color: $blue;
+                    }
+                    .card-text{
+                        font-size: .8rem;
+                        font-weight: 300;
+                        text-align: justify;
+                        letter-spacing: .1rem;
+                        color: $blue;
+                        margin-bottom: .5rem;
+                    }
+                    .tag{
+                        font-size: .8rem;
+                        font-weight: 400;
+                        border: .5px solid $blue;
+                        border-radius: 50px;
+                        padding: .4rem;
+                        color: $blue;
+                    }
+                }
+            }
+        }
     }
 }
