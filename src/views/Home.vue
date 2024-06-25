@@ -12,9 +12,7 @@
                 <div class="recommend-product mt-5">
                     <swiper class="mySwiper" :modules="modules"
                         :slidesPerView="'auto'"
-                        navigation
                         :pagination="{ clickable: true }"
-                        :scrollbar="{ draggable: true }"
                         :breakpoints="{
                           '320': {
                             slidesPerView: 1,
@@ -89,9 +87,7 @@
           <div class="topics-content">
             <swiper class="mySwiper" :modules="modules"
                   :slidesPerView="'auto'"
-                  navigation
                   :pagination="{ clickable: true }"
-                  :scrollbar="{ draggable: true }"
                   :breakpoints="{
                     '320': {
                       slidesPerView: 1,
@@ -124,19 +120,67 @@
                   </swiper-slide>
               </swiper>
           </div>
+          <div class="d-flex justify-content-end mt-3">
+            <a class="icon-link" href="#">
+              All Topics
+              <font-awesome-icon class="bars" icon="fas fa-arrow-right"/>
+            </a>
+          </div>
         </div>
       </div>
     </div>
+    <div class="shop mt-5">
+      <div class="container">
+        <div class="shop-section">
+          <div class="shop-title">
+            <h5>SHOP</h5>
+          </div>
+          <div class="shop-content">
+            <div class="shop-image rounded border-0">
+              <img src="../../public/image/about_cover.png" alt="shop-image">
+            </div>
+            <div class="shop-information">
+              <div class="name">oh~賣蔬果店</div>
+              <div class="opening-hours">
+                <span class="subtitle">營業時間</span>
+                <span class="content">全年無休，每日09:00 - 21:00</span>
+              </div>
+              <div class="tel">
+                <span class="subtitle">電話</span>
+                <span class="content">(02)1234-5678</span>
+              </div>
+              <div class="address">
+                <span class="subtitle">地址</span>
+                <span class="content">太陽市果蔬區健康路1號</span>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="banner">
+          <div class="slogan">NEW OPEN!</div>
+          <div class="content">消費金額超過1,000元免費，查看詳情看更多優惠。</div>
+          <a class="call-to-action">
+              點此了解詳情
+              <font-awesome-icon class="bars" icon="fas fa-arrow-right"/>
+          </a>
+        </div>
+      </div>
+    </div>
+    <Footer></Footer>
 </template>
 
 <script>
 import Navbar from '@/components/Navbar.vue'
-import { Swiper, SwiperSlide, Navigation, Pagination, Scrollbar, A11y } from 'swiper/vue'
+import Footer from '@/components/Footer.vue'
+import { Swiper, SwiperSlide } from 'swiper/vue'
+import { Pagination, A11y } from 'swiper/modules'
 import 'swiper/css'
+import 'swiper/css/pagination'
 
 export default ({
   components: {
     Navbar,
+    Footer,
     Swiper,
     SwiperSlide
   },
@@ -177,7 +221,7 @@ export default ({
       return {
         onSwiper,
         onSlideChange,
-        modules: [Navigation, Pagination, Scrollbar, A11y]
+        modules: [Pagination, A11y]
       }
     },
     getProducts () {
@@ -190,7 +234,7 @@ export default ({
     getArticles () {
       const api = `${process.env.VUE_APP_API}api/${process.env.VUE_APP_PATH}/articles`
       this.$http.get(api).then((res) => {
-        console.log(res.data.articles)
+        // console.log(res.data.articles)
         this.articles = res.data.articles
       })
     }

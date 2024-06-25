@@ -1,3 +1,8 @@
+html, body {
+    margin: 0;
+    padding: 0;
+    overflow-x: hidden;
+}  
 .main{
     .recommend{
         .marquee{
@@ -138,7 +143,7 @@
     }
 }
 .topics{
-    height: 80vh;
+    height: 65vh;
     width: 100%;
     pointer-events: none;
     .topics-section{
@@ -194,6 +199,155 @@
                         color: $blue;
                     }
                 }
+            }
+        }
+    }
+}
+.shop{
+    height: 68vh;
+    width: 100%;
+    pointer-events: none;
+    .shop-section {
+        .shop-title{
+            border-bottom:1.5px solid $blue;
+            padding: 1rem 0;
+            h5{
+                color: $blue;
+            }
+        }
+        .shop-content{
+            display: flex;
+            align-items: center;
+            .shop-image{
+                margin-top: 5rem;
+                width: 700px;
+                height: 425px;
+                overflow: hidden;
+                position: relative;
+                img{
+                    width: 100%;
+                    height: 100%;
+                    object-fit: cover;
+                }
+            }
+            .shop-image::after{
+                content: '';
+                position: absolute;
+                top: 0;
+                right: 0;
+                bottom: 0;
+                left: 0;
+                background: rgba(142, 142, 142, 0.5); 
+                mix-blend-mode: multiply;
+                border: none;
+                border-radius: 5px;
+            }
+            .shop-information{
+                margin-left: 3rem;
+                .name{
+                    font-size: 1.5rem;
+                    font-weight: 500;
+                    letter-spacing: .1rem;
+                }
+                .opening-hours{
+                    margin-top: 1rem;
+                    .subtitle{
+                        font-size: .8rem;
+                        font-weight: 500;
+                        border: .5px solid $blue;
+                        border-radius: 50px;
+                        padding: .5rem;
+                        margin-right: 1rem;
+                    }
+                    .content{
+                        font-size: 1rem;
+                        font-weight: 400;
+                        letter-spacing: .1rem;
+                    }
+                }
+                .tel{
+                    margin-top: 1rem;
+                    .subtitle{
+                        font-size: .8rem;
+                        font-weight: 500;
+                        border: .5px solid $blue;
+                        border-radius: 50px;
+                        padding: .5rem;
+                        margin-right: 1rem;
+                    }
+                    .content{
+                        font-size: 1rem;
+                        font-weight: 400;
+                        letter-spacing: .1rem;
+                    }
+                }
+                .address{
+                    margin-top: 1rem;
+                    .subtitle{
+                        font-size: .8rem;
+                        font-weight: 500;
+                        border: .5px solid $blue;
+                        border-radius: 50px;
+                        padding: .5rem;
+                        margin-right: 1rem;
+                    }
+                    .content{
+                        font-size: 1rem;
+                        font-weight: 400;
+                        letter-spacing: .1rem;
+                    }
+                }
+            }
+        }
+    }
+    .banner{
+        margin-top: 3rem;
+        border: 1.5px solid $blue;
+        padding: 1rem 1.5rem;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        .slogan{
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: $green;
+            letter-spacing: .1rem;
+        }
+        .content{
+            font-size: 1rem;
+            font-weight: 500;
+            letter-spacing: .1rem;
+        }
+        .call-to-action{
+            color: $white;
+            font-size: 1rem;
+            text-decoration: none;
+            background-color: $blue;
+            display: block;
+            text-align: center;
+            padding: 1rem 3rem;
+        }
+    }
+}
+.footer{
+    margin-top: 8rem;
+    width: 100%;
+    background-color: $blue;
+    color: $white;
+    .nav {
+        .nav-item{
+            padding: 1.1rem 0;
+            .nav-link{
+                color: $white;
+            }
+            .call-to-action{
+                color: $white;
+                font-size: .9rem;
+                text-decoration: none;
+                background-color: #393838;
+                display: block;
+                text-align: center;
+                padding: 1rem;
             }
         }
     }
