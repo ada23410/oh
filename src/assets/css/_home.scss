@@ -33,6 +33,13 @@ html, body {
                 .card-img-top {
                     position: relative;
                     display: inline-block;
+                    height: 450px; 
+                    background-size: cover; 
+                    background-position: center;
+                    border-radius: 0;
+                    @include mobile {
+                        height: 320px; 
+                    }
                 }
                 .card-img-top::after {
                     content: '';
@@ -74,7 +81,29 @@ html, body {
     .about-section{
         position: absolute;
         width: 75%;
+        display: block;
         z-index: 10;
+        @include extralarge-desktop {
+            width: 75%;
+        }
+        @include large-desktop {
+            width: 80%;
+        }
+        @include middle-desktop {
+            width: 87%;
+        }
+        @include desktop {
+            width: 90%;
+        }
+        @include tablet-portrait {
+            width: 90%;
+        }
+        @include tablet-landscape  {
+            width: 95%;
+        }
+        @include mobile {
+            width: 90%;
+        }
         .about-us-title{
             border-bottom:1.5px solid $white;
             padding: 2rem 0 1rem 0;
@@ -85,6 +114,34 @@ html, body {
         .about-us-content{
             margin-top:  20rem;
             width: 25%;
+            @include extralarge-desktop {
+                margin-top:  20rem;
+            }
+            @include large-desktop {
+                margin-top:  14rem;
+            }
+            @include middle-desktop {
+                margin-top:  14rem;
+            }
+            @include desktop {
+                margin-top:  14rem;
+            }
+            @include laptops {
+                margin-top:  14rem;
+                width: 30%;
+            }
+            @include tablet-portrait {
+                margin-top: 12rem;
+                width: 30%;
+            }
+            @include tablet-landscape  {
+                margin-top: 12rem;
+                width: 30%;
+            }
+            @include mobile {
+                margin-top: 14rem;
+                width: 100%;
+            }
             .tag{
                 color: $white;
                 font-size: .8rem;
@@ -156,12 +213,25 @@ html, body {
         }
         .topics-content{
             margin-top:  5rem;
+            @include tablet-portrait {
+                margin-top:  3rem;
+            }
+            @include mobile {
+                margin-top:  3rem;
+            }
             .card{
                 border: none;
                 position: relative;
                 .card-img-top {
                     position: relative;
                     display: inline-block;
+                    height: 300px; 
+                    background-size: cover; 
+                    background-position: center;
+                    border-radius: 0;
+                    @include mobile {
+                        height: 250px; 
+                    }
                 }
                 .card-img-top::after {
                     content: '';
@@ -218,12 +288,29 @@ html, body {
         .shop-content{
             display: flex;
             align-items: center;
+            flex-wrap: wrap;
             .shop-image{
                 margin-top: 5rem;
                 width: 700px;
                 height: 425px;
                 overflow: hidden;
                 position: relative;
+                @include laptops {
+                    margin-top: 3rem;
+                    width: 540px;
+                }
+                @include tablet-portrait {
+                    margin-top: 3rem;
+                    width: 328px;
+                    height: 328px;
+                }
+                @include tablet-landscape {
+                    width: 100%;
+                }
+                @include mobile {
+                    margin-top: 3rem;
+                    height: 328px;
+                }
                 img{
                     width: 100%;
                     height: 100%;
@@ -244,6 +331,14 @@ html, body {
             }
             .shop-information{
                 margin-left: 3rem;
+                @include tablet-landscape {
+                    margin-left: 0;
+                    margin-top: 2rem;
+                }
+                @include mobile {
+                    margin-left: 0;
+                    margin-top: 1rem;
+                }
                 .name{
                     font-size: 1.5rem;
                     font-weight: 500;
@@ -258,11 +353,21 @@ html, body {
                         border-radius: 50px;
                         padding: .5rem;
                         margin-right: 1rem;
+                        @include mobile {
+                            font-size: .8rem;
+                        }
                     }
                     .content{
                         font-size: 1rem;
                         font-weight: 400;
                         letter-spacing: .1rem;
+                        @include tablet-portrait {
+                            font-size: .9rem;
+                        }
+                        @include mobile {
+                            font-size: .8rem;
+                            letter-spacing: .1px;
+                        }
                     }
                 }
                 .tel{
@@ -274,11 +379,24 @@ html, body {
                         border-radius: 50px;
                         padding: .5rem;
                         margin-right: 1rem;
+                        @include mobile {
+                            font-size: .8rem;
+                        }
                     }
                     .content{
                         font-size: 1rem;
                         font-weight: 400;
                         letter-spacing: .1rem;
+                        @include tablet-portrait {
+                            font-size: .9rem;
+                        }
+                        @include tablet-portrait {
+                            font-size: .9rem;
+                        }
+                        @include mobile {
+                            font-size: .8rem;
+                            letter-spacing: .1px;
+                        }
                     }
                 }
                 .address{
@@ -290,11 +408,24 @@ html, body {
                         border-radius: 50px;
                         padding: .5rem;
                         margin-right: 1rem;
+                        @include mobile {
+                            font-size: .8rem;
+                        }
                     }
                     .content{
                         font-size: 1rem;
                         font-weight: 400;
                         letter-spacing: .1rem;
+                        @include tablet-portrait {
+                            font-size: .9rem;
+                        }
+                        @include tablet-portrait {
+                            font-size: .9rem;
+                        }
+                        @include mobile {
+                            font-size: .8rem;
+                            letter-spacing: .1px;
+                        }
                     }
                 }
             }
@@ -307,16 +438,25 @@ html, body {
         display: flex;
         align-items: center;
         justify-content: space-between;
+        @include mobile {
+            display: none;
+        }
         .slogan{
             font-size: 1.5rem;
             font-weight: 700;
             color: $green;
             letter-spacing: .1rem;
+            @include tablet-portrait {
+                font-size: 1.2rem;
+            }
         }
         .content{
             font-size: 1rem;
             font-weight: 500;
             letter-spacing: .1rem;
+            @include tablet-portrait {
+                font-size: .9rem;
+            }
         }
         .call-to-action{
             color: $white;
@@ -326,28 +466,9 @@ html, body {
             display: block;
             text-align: center;
             padding: 1rem 3rem;
-        }
-    }
-}
-.footer{
-    margin-top: 8rem;
-    width: 100%;
-    background-color: $blue;
-    color: $white;
-    .nav {
-        .nav-item{
-            padding: 1.1rem 0;
-            .nav-link{
-                color: $white;
-            }
-            .call-to-action{
-                color: $white;
+            @include tablet-portrait {
                 font-size: .9rem;
-                text-decoration: none;
-                background-color: #393838;
-                display: block;
-                text-align: center;
-                padding: 1rem;
+                padding: 1rem 1.5rem;
             }
         }
     }

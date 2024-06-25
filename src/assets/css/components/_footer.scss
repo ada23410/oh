@@ -1,0 +1,47 @@
+.footer{
+    margin-top: 8rem;
+    width: 100%;
+    background-color: $blue;
+    color: $white;
+    @include extralarge-desktop {
+        margin-top:  8rem;
+    }
+    @include large-desktop {
+        margin-top:  12rem;
+    }
+    @include middle-desktop {
+        margin-top:  12rem;
+    }
+    @include desktop {
+        margin-top:  12rem;
+    }
+    @include laptops {
+        margin-top:  10rem;
+    }
+    @include tablet-portrait {
+        margin-top:  4rem;
+    }
+    @include tablet-landscape {
+        margin-top: 22rem;
+    }
+    @include mobile {
+        margin-top:  6rem;
+    }
+    .nav {
+        .nav-item{
+            padding: 1.1rem 0;
+            .nav-link{
+                color: $white;
+            }
+            .call-to-action{
+                color: $white;
+                font-size: .9rem;
+                text-decoration: none;
+                background-color: #393838;
+                display: block;
+                text-align: center;
+                padding: 1rem;
+            }
+        }
+    }
+}

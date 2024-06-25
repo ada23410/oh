@@ -36,7 +36,7 @@
                         <swiper-slide v-for="item in products" :key="item.id">
                           <div class="card">
                             <h5 class="card-title">{{ item.title }}</h5>
-                            <div class="card-img-top rounded border-0" style="height: 450px; background-size: cover; background-position: center;border-radius: 0;" :style="{backgroundImage: `url(${item.imageUrl})`}"></div>
+                            <div class="card-img-top rounded border-0" :style="{backgroundImage: `url(${item.imageUrl})`}"></div>
                             <div class="card-body">
                               <a href="#" class="price">NT${{ item.origin_price }}</a>
                               <a href="#" class="add-to-cart"><font-awesome-icon class="bars me-2" icon="fas fa-bag-shopping"/>放入袋中</a>
@@ -110,7 +110,7 @@
                   @slideChange="onSlideChange">
                   <swiper-slide v-for="item in articles" :key="item.id">
                     <div class="card">
-                      <div class="card-img-top rounded border-0" style="height: 300px; background-size: cover; background-position: center;border-radius: 0;" :style="{backgroundImage: `url(${item.imageUrl})`}"></div>
+                      <div class="card-img-top rounded border-0" :style="{backgroundImage: `url(${item.imageUrl})`}"></div>
                       <div class="card-body">
                         <h5 class="card-title">{{ item.title }}</h5>
                         <p class="card-text">{{ item.description }}</p>
