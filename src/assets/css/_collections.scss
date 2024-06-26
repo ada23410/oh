@@ -1,0 +1,74 @@
+.cover {
+    width: 100vw;
+    background-color: $blue;
+    .title {
+        color: $white;
+        font-size: 21px;
+        text-align: center;
+        padding: 2rem 0;
+    }
+}
+.product-navigation{
+    .navigation {
+        display: flex;
+        .breadcrumb{
+            margin-top: 2rem;
+        }
+        .category{
+            margin: auto;
+        }
+    }
+}
+.products-list {
+    .card{
+        border: none;
+        position: relative;
+        .card-title{
+            position: absolute;
+            padding: 1rem;
+            font-size: 18px;
+            font-weight: 400;
+            color: $white;
+            z-index: 1;
+        }
+        .card-img-top {
+            position: relative;
+            display: inline-block;
+            height: 450px; 
+            background-size: cover; 
+            background-position: center;
+            border-radius: 0;
+            @include mobile {
+                height: 320px; 
+            }
+        }
+        .card-img-top::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            right: 0;
+            bottom: 0;
+            left: 0;
+            background: rgba(181, 181, 181, 0.5); 
+            mix-blend-mode: multiply;
+            border: none;
+            border-radius: 5px;
+        }
+        .card-body{
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: .5rem;
+            .price{
+                text-decoration: none;
+                font-weight: 500;
+            }
+            .add-to-cart {
+                text-decoration: none;
+            }
+            .add-to-favorite {
+                text-decoration: none;
+            }
+        }
+    }
+}
