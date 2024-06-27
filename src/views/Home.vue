@@ -47,10 +47,10 @@
                   </swiper>
               </div>
               <div class="d-flex justify-content-end mt-3">
-                <a class="icon-link" href="#">
+                <router-link class="icon-link" to="/items">
                   All Products
                   <font-awesome-icon class="bars" icon="fas fa-arrow-right"/>
-                </a>
+                </router-link>
               </div>
           </div>
       </div>
