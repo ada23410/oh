@@ -1,3 +1,4 @@
+<!-- eslint-disable no-unused-vars -->
 <!-- eslint-disable vue/multi-word-component-names -->
 <template>
     <NavbarDashboard></NavbarDashboard>
@@ -6,7 +7,6 @@
         <router-view/>
       </div>
 </template>
-
 <script>
 import emitter from '@/methods/emitter'
 import ToastMessage from '@/components/ToastMessage.vue'

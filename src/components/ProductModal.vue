@@ -22,22 +22,22 @@
                       <label for="customFile" class="form-label">或 上傳圖片
                       <i class="fas fa-spinner fa-spin"></i>
                       </label>
-                      <input type="file" id="customFile" class="form-control" ref="fileInput" @change="uploadFile">
+                      <input type="file" id="customFile" class="form-control" ref="fileInput" @change="uploadFile" multiple>
                   </div>
                   <img class="img-fluid" :src="tempProduct.imageUrl" alt="">
-                <!-- 延伸技巧，多圖 -->
-                  <div class="mt-5" v-if="tempProduct.images">
-                      <div class="mb-3 input-group" v-for="(image, key) in tempProduct.images" :key="key">
-                          <input type="url" class="form-control form-control" placeholder="請輸入連結" v-model="tempProduct.images[key]">
-                          <button type="button" class="btn btn-outline-danger" @click="tempProduct.images.splice(key, 1)">
-                              移除
-                          </button>
-                      </div>
-                      <div v-if="tempProduct.images[tempProduct.images.length - 1] || !tempProduct.images.length">
-                          <button class="btn btn-outline-primary btn-sm d-block w-100" @click="tempProduct.images.push('')">
-                              新增圖片
-                          </button>
-                      </div>
+                  <!-- 延伸技巧，多圖 -->
+                  <div class="mt-5" v-if="tempProduct.images && tempProduct.images.length">
+                        <div class="mb-3 input-group" v-for="(image, key) in tempProduct.images" :key="key">
+                            <input type="url" class="form-control form-control" placeholder="請輸入連結" v-model="tempProduct.images[key]">
+                            <button type="button" class="btn btn-outline-danger" @click="tempProduct.images.splice(key, 1)">
+                                移除
+                            </button>
+                        </div>
+                        <div v-if="tempProduct.images[tempProduct.images.length - 1] || !tempProduct.images.length">
+                            <button class="btn btn-outline-primary btn-sm d-block w-100" @click="tempProduct.images.push('')">
+                                新增圖片
+                            </button>
+                        </div>
                   </div>
                 </div>
                 <div class="col-sm-8">
@@ -122,7 +122,7 @@ export default ({
   },
   watch: {
     product () {
-      this.tempProduct = this.product
+      this.tempProduct = { ...this.product, images: this.product.images || [] }
     }
   },
   data () {
@@ -139,16 +139,23 @@ export default ({
       this.modal.hide()
     },
     uploadFile () {
-      const uploadedFile = this.$refs.fileInput.files[0]
-      //   console.dir(uploadedFile)
+      const uploadedFiles = this.$refs.fileInput.files
       const formData = new FormData()
-      formData.append('file-to-upload', uploadedFile)
+      Array.from(uploadedFiles).forEach((file) => {
+        formData.append('files[]', file)
+      })
+
       const url = `${process.env.VUE_APP_API}api/${process.env.VUE_APP_PATH}/admin/upload`
-      this.$http.post(url, formData).then((res) => {
-        if (res.data.success) {
-          console.log(res.data)
-          this.tempProduct.imageUrl = res.data.imageUrl
+      this.$http.post(url, formData).then((response) => {
+        // 檢查 response.data.images 是否存在
+        if (response.data.success && response.data.images) {
+          this.tempProduct.images.push(response.data.imageUrl)
+        } else if (response.data.success && response.data.imageUrl) {
+          // 如果只返回單個 imageUrl
+          this.tempProduct.imageUrl = response.data.imageUrl
         }
+      }).catch((error) => {
+        console.error('上傳失敗', error)
       })
     }
   },
