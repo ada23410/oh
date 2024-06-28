@@ -43,11 +43,13 @@ export default ({
   data () {
     return {
       product: {},
+      cart: {},
       status: {
         loadingItem: '' // 對應品項id
       }
     }
   },
+  inject: ['emitter'],
   methods: {
     getProduct (productId) {
       const api = `${process.env.VUE_APP_API}api/${process.env.VUE_APP_PATH}/product/${productId}`
@@ -67,6 +69,14 @@ export default ({
       this.$http.post(api, { data: cart }).then((res) => {
         this.status.loadingItem = ''
         console.log(res.data)
+        console.log('發出事件', res.data)
+        this.emitter.emit('addCart', res.data)
+      })
+    },
+    getCart () {
+      const api = `${process.env.VUE_APP_API}api/${process.env.VUE_APP_PATH}/cart`
+      this.$http.get(api).then((res) => {
+        console.log(res.data.carts)
       })
     }
   },

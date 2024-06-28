@@ -9,12 +9,12 @@
                 <div class="menu">Menu</div>
             </button>
             <a class="navbar-brand align-items-center" href="#">ooh</a>
-            <a class="text-decoration-none" href="#">
+            <router-link class="text-decoration-none" to="/cart">
                 <div class="user-cart">
                     <div class="user-cart-name">購物車</div>
                     <div class="user-cart-count">0</div>
                 </div>
-            </a>
+            </router-link>
         </div>
     </nav>
     <div :class="{'show': isSidebarVisible}" class="side-bar-menu">
