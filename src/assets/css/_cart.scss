@@ -1,0 +1,28 @@
+.cart {
+    .cart-function{
+        border-bottom:1.5px solid $blue;
+        padding: 1rem 0;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        .title {
+          font-size: 1.5rem;
+        }
+        .delete-all {
+            font-size: .8rem;
+            border-radius: 0;
+        }
+    }
+    .table{
+        .product-image {
+            width: 100px;
+            height: 100px;
+            overflow: hidden;
+            img {
+                width: 100%;
+                height: 100%;
+                object-fit: cover;
+            }
+        }
+    }
+}
