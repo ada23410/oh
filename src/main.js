@@ -1,22 +1,32 @@
-/* eslint-disable no-undef */
-/* eslint-disable vue/multi-word-component-names */
 import { createApp } from 'vue'
 import App from './App.vue'
 import router from './router'
 import axios from 'axios'
 import VueAxios from 'vue-axios'
 import { library } from '@fortawesome/fontawesome-svg-core'
-// fas 是所有的 solid icon
 import { fas } from '@fortawesome/free-solid-svg-icons'
 import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome'
-// Import component
 import Loading from 'vue3-loading-overlay'
-// Import stylesheet
 import 'vue3-loading-overlay/dist/vue3-loading-overlay.css'
 import { currency, date } from './methods/filter'
 import $httpMessageState from './methods/pushMessageState'
 import { initializeApp } from 'firebase/app'
 import { getAnalytics } from 'firebase/analytics'
+import { Form, Field, ErrorMessage, defineRule, configure } from 'vee-validate'
+import { required, email } from '@vee-validate/rules'
+import { localize, setLocale } from '@vee-validate/i18n'
+import zhTW from '@vee-validate/i18n/dist/locale/zh_TW.json'
+
+// 定义验证规则
+defineRule('required', required)
+defineRule('email', email)
+
+configure({
+  generateMessage: localize({ zh_TW: zhTW }), // 载入繁体中文语系
+  validateOnInput: true // 当输入任何内容直接进行验证
+})
+// 设置默认语系
+setLocale('zh_TW')
 
 const firebaseConfig = {
   apiKey: process.env.VUE_APP_FIREBASE_API_KEY,
@@ -49,4 +59,7 @@ app.config.globalProperties.$httpMessageState = $httpMessageState
 app.use(VueAxios, axios)
 app.use(router)
 app.component('Loading', Loading)
+app.component('Form', Form)
+app.component('Field', Field)
+app.component('ErrorMessage', ErrorMessage)
 app.mount('#app')

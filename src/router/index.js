@@ -20,6 +20,10 @@ const routes = [
       {
         path: 'cart',
         component: () => import('../views/Cart.vue')
+      },
+      {
+        path: 'checkout/:orderId',
+        component: () => import('../views/Checkout.vue')
       }
     ]
   },
