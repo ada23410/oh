@@ -1,0 +1,15 @@
+.article {
+    .cover{
+        width: 100vw;
+        height: 300px;
+        background: no-repeat cover; 
+    }
+    .content {
+        margin-top: 1rem;
+        .title {
+            font-size: 2rem;
+            font-weight: 600;
+            letter-spacing: .1rem;
+        }
+    }
+}

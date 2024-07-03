@@ -24,6 +24,14 @@ const routes = [
       {
         path: 'checkout/:orderId',
         component: () => import('../views/Checkout.vue')
+      },
+      {
+        path: 'articles',
+        component: () => import('../views/Topics.vue')
+      },
+      {
+        path: 'articles/:articleId',
+        component: () => import('../views/Article.vue')
       }
     ]
   },
