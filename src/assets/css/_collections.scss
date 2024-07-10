@@ -65,9 +65,13 @@
             }
             .add-to-cart {
                 text-decoration: none;
+                cursor: pointer;
             }
             .add-to-favorite {
-                text-decoration: none;
+                cursor: pointer;
+                .like {
+                    color: $red;
+                }
             }
         }
     }

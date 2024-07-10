@@ -28,19 +28,21 @@
     <div class="container">
       <div class="row">
         <div class="col-4 my-5" v-for="item in paginatedProducts" :key="item.id">
-          <a @click="getProduct(item.id)">
             <div class="card">
-              <h5 class="card-title">{{ item.title }}</h5>
-              <div class="card-img-top rounded border-0" :style="{backgroundImage: `url(${item.imageUrl})`}"></div>
+              <a @click="getProduct(item.id)">
+                <h5 class="card-title">{{ item.title }}</h5>
+                <div class="card-img-top rounded border-0" :style="{backgroundImage: `url(${item.imageUrl})`}"></div>
+              </a>
               <div class="card-body">
                 <a href="#" class="price">NT${{ item.origin_price }}</a>
-                <a href="#" class="add-to-cart"><font-awesome-icon class="bars me-2" icon="fas fa-bag-shopping"/>放入袋中</a>
-                <a href="#" class="add-to-favorite">
-                  <font-awesome-icon class="bars" icon="fas fa-heart"/>
-                </a>
+                <div class="add-to-cart" @click="addCart(item.id)">
+                  <font-awesome-icon class="bars me-2" icon="fas fa-bag-shopping"/>放入袋中
+                </div>
+                <div class="add-to-favorite"  @click="toggleFavorite(item)">
+                  <font-awesome-icon :icon="['fas', 'heart']"  :class="{ 'like': favorites.includes(item.id) }"/>
+                </div>
               </div>
             </div>
-          </a>
         </div>
       </div>
       <Pagination :pages="pagination" @emit-pages="goToPage" />
@@ -62,9 +64,11 @@ export default {
       currentPage: 1,
       perPage: 9,
       filteredProducts: [],
-      pagination: { current_page: 1, total_pages: 1, has_next: false, has_pre: false }
+      pagination: { current_page: 1, total_pages: 1, has_next: false, has_pre: false },
+      favorites: []
     }
   },
+  inject: ['emitter'],
   methods: {
     getProducts () {
       const api = `${process.env.VUE_APP_API}api/${process.env.VUE_APP_PATH}/products/all`
@@ -102,6 +106,16 @@ export default {
       this.currentPage = page
       this.updateProducts()
     },
+    toggleFavorite (item) {
+      console.log(item)
+      const index = this.favorites.indexOf(item.id)
+      if (index === -1) {
+        this.favorites.push(item.id)
+      } else {
+        this.favorites.splice(index, 1)
+      }
+      localStorage.setItem('favorites', JSON.stringify(this.favorites))
+    },
     updateProducts () {
       if (this.filter === '') {
         this.filteredProducts = this.products
@@ -115,6 +129,19 @@ export default {
       this.pagination.has_pre = this.currentPage > 1
       this.pagination.has_next = this.currentPage < this.pagination.total_pages
       this.paginatedProducts = this.filteredProducts.slice(start, end)
+    },
+    addCart (productId) {
+      console.log(productId)
+      const api = `${process.env.VUE_APP_API}api/${process.env.VUE_APP_PATH}/cart`
+      const cart = {
+        product_id: productId,
+        qty: 1
+      }
+      this.$http.post(api, { data: cart }).then((res) => {
+        console.log(res.data)
+        console.log('發出事件', res.data)
+        this.emitter.emit('addCart', res.data)
+      })
     }
   },
   computed: {
@@ -134,6 +161,10 @@ export default {
   },
   created () {
     this.getProducts()
+    const storedFavorites = localStorage.getItem('favorites')
+    if (storedFavorites) {
+      this.favorites = JSON.parse(storedFavorites)
+    }
   }
 }
 </script>
