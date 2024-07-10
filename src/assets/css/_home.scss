@@ -37,6 +37,7 @@ html, body {
                     background-size: cover; 
                     background-position: center;
                     border-radius: 0;
+                    cursor: pointer;
                     @include mobile {
                         height: 320px; 
                     }
@@ -59,11 +60,10 @@ html, body {
                     align-items: center;
                     padding: .5rem;
                     .price{
-                        text-decoration: none;
                         font-weight: 500;
                     }
                     .add-to-cart {
-                        text-decoration: none;
+                        cursor: pointer;
                     }
                     .add-to-favorite {
                         text-decoration: none;
@@ -202,7 +202,6 @@ html, body {
 .topics{
     height: 65vh;
     width: 100%;
-    pointer-events: none;
     .topics-section{
         .topics-title{
             border-bottom:1.5px solid $blue;

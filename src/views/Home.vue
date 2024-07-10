@@ -33,14 +33,18 @@
                       @slideChange="onSlideChange">
                       <swiper-slide v-for="item in products" :key="item.id">
                         <div class="card">
-                          <h5 class="card-title">{{ item.title }}</h5>
-                          <div class="card-img-top rounded border-0" :style="{backgroundImage: `url(${item.imageUrl})`}"></div>
+                          <a @click="getProduct(item.id)">
+                            <h5 class="card-title">{{ item.title }}</h5>
+                            <div class="card-img-top rounded border-0" :style="{backgroundImage: `url(${item.imageUrl})`}"></div>
+                          </a>
                           <div class="card-body">
-                            <a href="#" class="price">NT${{ item.origin_price }}</a>
-                            <a href="#" class="add-to-cart"><font-awesome-icon class="bars me-2" icon="fas fa-bag-shopping"/>放入袋中</a>
-                            <a href="#" class="add-to-favorite">
-                              <font-awesome-icon class="bars" icon="fas fa-heart"/>
-                            </a>
+                            <div class="price">NT${{ item.origin_price }}</div>
+                            <div class="add-to-cart" @click="addCart(item.id)">
+                              <font-awesome-icon class="bars me-2" icon="fas fa-bag-shopping"/>放入袋中
+                            </div>
+                            <div class="add-to-favorite"  @click="toggleFavorite(item)">
+                              <font-awesome-icon :icon="['fas', 'heart']"  :class="{ 'like': favorites.includes(item.id) }"/>
+                            </div>
                           </div>
                         </div>
                       </swiper-slide>
@@ -107,22 +111,24 @@
                 @swiper="onSwiper"
                 @slideChange="onSlideChange">
                 <swiper-slide v-for="item in articles" :key="item.id">
-                  <div class="card">
-                    <div class="card-img-top rounded border-0" :style="{backgroundImage: `url(${item.imageUrl})`}"></div>
-                    <div class="card-body">
-                      <h5 class="card-title">{{ item.title }}</h5>
-                      <p class="card-text">{{ item.description }}</p>
-                      <span class="tag">{{ item.tag }}</span>
+                  <a @click="getArticle(item.id)">
+                    <div class="card">
+                        <div class="card-img-top rounded border-0" :style="{backgroundImage: `url(${item.imageUrl})`}"></div>
+                      <div class="card-body">
+                        <h5 class="card-title">{{ item.title }}</h5>
+                        <p class="card-text">{{ item.description }}</p>
+                        <span class="tag">{{ item.tag }}</span>
+                      </div>
                     </div>
-                  </div>
+                  </a>
                 </swiper-slide>
             </swiper>
         </div>
         <div class="d-flex justify-content-end mt-3">
-          <a class="icon-link" href="#">
+          <router-link class="icon-link" to="/articles">
             All Topics
             <font-awesome-icon class="bars" icon="fas fa-arrow-right"/>
-          </a>
+          </router-link>
         </div>
       </div>
     </div>
@@ -169,6 +175,7 @@
 <script>
 import { Swiper, SwiperSlide } from 'swiper/vue'
 import { Pagination, A11y } from 'swiper/modules'
+import favorites from '@/methods/favorite'
 import 'swiper/css'
 import 'swiper/css/pagination'
 
@@ -186,9 +193,11 @@ export default {
       onSlideChange: null,
       products: [],
       pagination: {},
-      articles: []
+      articles: [],
+      favorites: []
     }
   },
+  inject: ['emitter'],
   methods: {
     // 跑馬燈
     marqueeMove () {
@@ -224,16 +233,42 @@ export default {
         this.products = res.data.products
       })
     },
+    getProduct (id) {
+      this.$router.push(`/product/${id}`)
+    },
     getArticles () {
       const api = `${process.env.VUE_APP_API}api/${process.env.VUE_APP_PATH}/articles`
       this.$http.get(api).then((res) => {
         // console.log(res.data.articles)
         this.articles = res.data.articles
       })
+    },
+    getArticle (id) {
+      this.$router.push(`/articles/${id}`)
+    },
+    addCart (productId) {
+      console.log(productId)
+      const api = `${process.env.VUE_APP_API}api/${process.env.VUE_APP_PATH}/cart`
+      const cart = {
+        product_id: productId,
+        qty: 1
+      }
+      this.$http.post(api, { data: cart }).then((res) => {
+        console.log(res.data)
+        console.log('發出事件', res.data)
+        this.emitter.emit('addCart', res.data)
+      })
+    },
+    toggleFavorite (item) {
+      this.favorites = favorites.toggleFavorite(this.favorites, item.id)
     }
+  },
+  mounted () {
+    this.setup() // 确保在mounted生命周期钩子中调用
   },
   created () {
     // console.log(process.env.VUE_APP_API, process.env.VUE_APP_PATH)
+    this.favorites = favorites.loadFavorites()
     this.getProducts()
     this.getArticles()
   }

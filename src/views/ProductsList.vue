@@ -34,7 +34,7 @@
                 <div class="card-img-top rounded border-0" :style="{backgroundImage: `url(${item.imageUrl})`}"></div>
               </a>
               <div class="card-body">
-                <a href="#" class="price">NT${{ item.origin_price }}</a>
+                <div class="price">NT${{ item.origin_price }}</div>
                 <div class="add-to-cart" @click="addCart(item.id)">
                   <font-awesome-icon class="bars me-2" icon="fas fa-bag-shopping"/>放入袋中
                 </div>
