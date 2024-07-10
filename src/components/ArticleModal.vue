@@ -42,12 +42,12 @@
                     <div class="mb-3">
                         <label for="content" class="form-label">內容</label>
                         <textarea type="text" class="form-control" id="content" v-model="tempArticle.content"
-                            placeholder="請輸入內容"></textarea>
+                            placeholder="請輸入內容" rows="10" cols="30"></textarea>
                     </div>
                     <div class="mb-3">
                         <label for="tag" class="form-label">分類</label>
                         <textarea type="text" class="form-control" id="tag" v-model="tempArticle.tag"
-                            placeholder="請輸入關鍵字" rows="10" cols="30"></textarea>
+                            placeholder="請輸入關鍵字"></textarea>
                     </div>
                     <div class="mb-3">
                         <label for="create_at">建立日期</label>

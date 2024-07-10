@@ -2,14 +2,73 @@
     .cover{
         width: 100vw;
         height: 300px;
-        background: no-repeat cover; 
+        background-position: center;
+        background-repeat: no-repeat;
+        background-size: cover;
     }
-    .content {
-        margin-top: 1rem;
-        .title {
-            font-size: 2rem;
-            font-weight: 600;
-            letter-spacing: .1rem;
+    .content-wrap {
+        max-width: 750px;
+        margin-left: auto;
+        margin-right: auto;
+        .article-content {
+            margin: 1rem auto;
+            .tag {
+                color: $blue;
+                font-size: .8rem;
+                font-weight: 400;
+                margin-bottom: .5rem;
+                border: .5px solid $blue;
+                border-radius: 50px;
+                display: inline-block;
+                padding: .5rem;
+            }
+            .title {
+                font-size: 2rem;
+                font-weight: 600;
+                letter-spacing: .1rem;
+            }
+            .description {
+                font-size: 1rem;
+                font-weight: 500;
+                letter-spacing: .1rem;
+                color: $gray-700;
+                border-bottom:1.5px solid $blue;
+                padding-bottom: 1rem;
+            }
+            .article-info {
+                display: flex;
+                align-items: center;
+                .author {
+                    margin-top: 1rem;
+                    .author-title {
+                        font-size: .9rem;
+                        font-weight: 600;
+                    }
+                    .author-content {
+                        font-size: .9rem;
+                        font-weight: 500;
+                    }
+                }
+                .update-date {
+                    margin-top: 1rem;
+                    margin-left: 2rem;
+                    .date-title {
+                        font-size: .9rem;
+                        font-weight: 600;
+                    }
+                    .date-content {
+                        font-size: .9rem;
+                        font-weight: 500;
+                    }
+                }
+            }
+            .content {
+                padding-top: 1rem;
+                line-height: 2rem;
+                font-size: 1rem;
+                font-weight: 400;
+                text-align: justify;
+            }
         }
     }
 }
