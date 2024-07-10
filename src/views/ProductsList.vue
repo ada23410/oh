@@ -52,6 +52,7 @@
 
 <script>
 import Pagination from '../components/Pagination.vue'
+import favorites from '../methods/favorite'
 
 export default {
   components: {
@@ -107,14 +108,7 @@ export default {
       this.updateProducts()
     },
     toggleFavorite (item) {
-      console.log(item)
-      const index = this.favorites.indexOf(item.id)
-      if (index === -1) {
-        this.favorites.push(item.id)
-      } else {
-        this.favorites.splice(index, 1)
-      }
-      localStorage.setItem('favorites', JSON.stringify(this.favorites))
+      this.favorites = favorites.toggleFavorite(this.favorites, item.id)
     },
     updateProducts () {
       if (this.filter === '') {
@@ -160,11 +154,8 @@ export default {
     }
   },
   created () {
+    this.favorites = favorites.loadFavorites()
     this.getProducts()
-    const storedFavorites = localStorage.getItem('favorites')
-    if (storedFavorites) {
-      this.favorites = JSON.parse(storedFavorites)
-    }
   }
 }
 </script>
