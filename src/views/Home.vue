@@ -260,6 +260,7 @@ export default {
       })
     },
     toggleFavorite (item) {
+      console.log(item.id)
       this.favorites = favorites.toggleFavorite(this.favorites, item.id)
     }
   },

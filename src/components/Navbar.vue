@@ -30,14 +30,14 @@
                     <div class="list">
                         <ul class="navbar-nav">
                             <li class="nav-item">
-                                <a class="nav-link" href="#">Collections
+                                <router-link class="nav-link" to="/items">Collections
                                     <font-awesome-icon class="arrow" icon="fas fa-arrow-right"/>
-                                </a>
+                                </router-link>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link" href="#">Topics
+                                <router-link class="nav-link" to="/articles">Topics
                                     <font-awesome-icon class="arrow" icon="fas fa-arrow-right"/>
-                                </a>
+                                </router-link>
                             </li>
                             <li class="nav-item">
                                 <a class="nav-link" href="#">About us

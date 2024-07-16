@@ -11,7 +11,7 @@
                 <div class="col mb-3"></div>
                 <div class="col mb-3">
                     <ul class="nav flex-column">
-                        <li class="nav-item border-bottom border-secondary-subtle"><a href="#" class="nav-link p-0">全部商品</a></li>
+                        <li class="nav-item border-bottom border-secondary-subtle"><router-link class="nav-link p-0" to="/items">全部商品</router-link></li>
                         <li class="nav-item"><a href="#" class="nav-link p-0">手工啤酒系列</a></li>
                         <li class="nav-item"><a href="#" class="nav-link p-0">醃漬食品系列</a></li>
                         <li class="nav-item"><a href="#" class="nav-link p-0">健康小食系列</a></li>
