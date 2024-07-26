@@ -40,9 +40,9 @@
                                 </router-link>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link" href="#">About us
+                                <router-link class="nav-link" to="/about">About us
                                     <font-awesome-icon class="arrow" icon="fas fa-arrow-right"/>
-                                </a>
+                                </router-link>
                             </li>
                         </ul>
                     </div>
