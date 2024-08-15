@@ -81,6 +81,12 @@ html, body {
                 }
             }
         }
+        .icon-link{
+            transition: transform 0.5s ease; 
+            &:hover {
+                transform: translateX(10px); 
+            }
+        }
     }
 }
 .about-us{
@@ -177,13 +183,31 @@ html, body {
                 margin-bottom: 1rem;
             }
             .call-to-action{
-                color: $white;
+                // color: $white;
                 font-size: 1rem;
                 text-decoration: none;
-                background-color: $blue;
+                // background-color: $blue;
                 display: block;
                 text-align: center;
                 padding: 1rem;
+                --bg: #000;
+                --hover-bg: #1b1b1b;
+                --hover-text: #ffffff;
+                color: #fff;
+                cursor: pointer;
+                border: 1px solid var(--bg);
+                background: var(--bg);
+                transition: 0.2s;
+                &:hover {
+                    color: var(--hover-text);
+                    transform: translate(-0.25rem, -0.25rem);
+                    background: var(--hover-bg);
+                    box-shadow: 0.25rem 0.25rem var(--bg);
+                }
+                &:active {
+                    transform: translate(0);
+                    box-shadow: none;
+                }
             }
         }
     }
@@ -284,6 +308,12 @@ html, body {
                         color: $blue;
                     }
                 }
+            }
+        }
+        .icon-link{
+            transition: transform 0.5s ease; 
+            &:hover {
+                transform: translateX(10px); 
             }
         }
     }
