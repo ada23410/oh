@@ -12,7 +12,7 @@
             <router-link class="text-decoration-none" to="/cart">
                 <div class="user-cart">
                     <div class="user-cart-name">購物車</div>
-                    <div class="user-cart-count">0</div>
+                    <div class="user-cart-count">{{ cartCount }}</div>
                 </div>
             </router-link>
         </div>
@@ -60,16 +60,41 @@ export default ({
   data () {
     return {
       isNavbarVisible: true,
-      isSidebarVisible: false
+      isSidebarVisible: false,
+      cart: [],
+      cartCount: 0
     }
   },
+  inject: ['emitter'],
   methods: {
     openSidebar () {
       this.isSidebarVisible = true
     },
     closeSidebar () {
       this.isSidebarVisible = false
+    },
+    getCart () {
+      const api = `${process.env.VUE_APP_API}api/${process.env.VUE_APP_PATH}/cart`
+      this.$http.get(api).then((res) => {
+        console.log('API Response', res.data.data)
+        if (res.data.data && res.data.data.carts) {
+          this.cart = res.data.data.carts
+          this.cartCount = this.cart.reduce((sum, cartItem) => sum + cartItem.qty, 0)
+        } else {
+          this.cart = []
+          this.cartCount = 0
+        }
+      })
     }
+  },
+  created () {
+    this.getCart()
+    this.emitter.on('cart-updated', () => {
+      this.getCart()
+    })
+  },
+  beforeUnmount () {
+    this.emitter.off('cart-updated')
   }
 })
 </script>

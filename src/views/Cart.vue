@@ -181,6 +181,7 @@ export default {
         // console.log(res.data)
         this.status.loadingItem = ''
         this.getCart()
+        this.emitter.emit('cart-updated')
       })
     },
     removeCartItem (item) {
