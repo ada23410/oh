@@ -6,6 +6,9 @@
         margin-bottom: 10rem;
         .wrap {
             margin: 5rem 0;
+            @include mobile {
+                margin: 2rem 0 2rem 0;
+            }
             .subtitle{
                 display: flex;
                 align-items: center;
@@ -57,6 +60,9 @@
                 }
                 .paragraph-wrap {
                     position: relative;
+                    @include mobile {
+                        position: unset;
+                    }
                     .paragraph {
                         position: absolute;
                         max-width: 540px;
@@ -65,6 +71,9 @@
                         border-radius: 5px;
                         right: 0;
                         top: -75px;
+                        @include mobile {
+                            position: unset;
+                        }
                         p {
                             padding: 1.5rem;
                             line-height: 2rem;
@@ -77,9 +86,6 @@
             }
             .content-c {
                 margin-top: 2rem;
-                display: flex;
-                justify-content: flex-end;
-                position: relative;
                 .image-c {
                     max-width: 540px;
                     max-height: 400px;
@@ -92,14 +98,21 @@
                     }
                 }
                 .paragraph-wrap {
-                    position: absolute;
-                    left: 0;
-                    bottom: -75px;
-                    max-width: 540px;
-                    max-height: 400px;
+                    position: relative;
+                    @include mobile {
+                        position: unset;
+                    }
                     .paragraph {
+                        position: absolute;
+                        right: 0;
+                        bottom: -75px;
+                        max-width: 540px;
+                        max-height: 400px;
                         background-color: rgba($color: #ffffff7a, $alpha: .9);
                         border-radius: 5px;
+                        @include mobile {
+                            position: unset;
+                        }
                         p {
                             padding: 1.5rem;
                             line-height: 2rem;

@@ -10,12 +10,12 @@
                 </ol>
             </div>
             <div class="row">
-                <div class="col-6">
+                <div class="col-md-6">
                   <div class="img-wrap">
                     <img :src="product.imageUrl" alt="" class="img-fluid rounded border-0 mb-3">
                   </div>
                 </div>
-                <div class="col-6">
+                <div class="col-md-6">
                   <div class="information">
                       <div class="title">{{ product.title }}</div>
                       <div class="content">{{ product.content }}</div>

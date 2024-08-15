@@ -1,4 +1,5 @@
 <template>
+  <Loading :active="isLoading"></Loading>
   <div class="cover">
     <div class="container">
       <h1 class="title">Collections</h1>
@@ -27,7 +28,7 @@
   <div class="products-list">
     <div class="container">
       <div class="row">
-        <div class="col-4 my-5" v-for="item in paginatedProducts" :key="item.id">
+        <div class="col-12 col-sm-6 col-md-4 my-3 my-sm-3 my-md-5" v-for="item in paginatedProducts" :key="item.id">
             <div class="card">
               <a @click="getProduct(item.id)">
                 <h5 class="card-title">{{ item.title }}</h5>
@@ -66,14 +67,17 @@ export default {
       perPage: 9,
       filteredProducts: [],
       pagination: { current_page: 1, total_pages: 1, has_next: false, has_pre: false },
-      favorites: []
+      favorites: [],
+      isLoading: false
     }
   },
   inject: ['emitter'],
   methods: {
     getProducts () {
       const api = `${process.env.VUE_APP_API}api/${process.env.VUE_APP_PATH}/products/all`
+      this.isLoading = true
       this.$http.get(api).then((res) => {
+        this.isLoading = false
         if (res.data.success) {
           this.products = res.data.products
           this.updateProducts()
@@ -109,6 +113,10 @@ export default {
     },
     toggleFavorite (item) {
       this.favorites = favorites.toggleFavorite(this.favorites, item.id)
+      this.emitter.emit('push-message', {
+        style: 'success',
+        title: '已加入最愛！'
+      })
     },
     updateProducts () {
       if (this.filter === '') {
@@ -132,9 +140,17 @@ export default {
         qty: 1
       }
       this.$http.post(api, { data: cart }).then((res) => {
-        console.log(res.data)
-        console.log('發出事件', res.data)
-        this.emitter.emit('addCart', res.data)
+        if (res.data.success) {
+          console.log(res.data)
+          console.log('發出事件', res.data)
+          this.emitter.emit('addCart', res.data)
+          this.emitter.emit('push-message', {
+            style: 'success',
+            title: '商品已加入更物車！'
+          })
+        } else {
+          throw new Error(res.data.message || '加入商品失敗！')
+        }
       })
     }
   },

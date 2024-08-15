@@ -16,7 +16,7 @@
         margin-top:  12rem;
     }
     @include laptops {
-        margin-top:  10rem;
+        margin-top:  6rem;
     }
     @include tablet-portrait {
         margin-top:  4rem;
@@ -25,7 +25,7 @@
         margin-top: 22rem;
     }
     @include mobile {
-        margin-top:  6rem;
+        margin-top:  4rem;
     }
     .nav {
         .nav-item{

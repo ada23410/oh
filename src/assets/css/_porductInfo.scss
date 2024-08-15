@@ -8,6 +8,15 @@
         width: 100%;
         height: 620px;
         overflow: hidden;
+        @include tablet-landscape {
+            height: 540px;
+        }
+        @include tablet-portrait {
+            height: 350px;
+        }
+        @include mobile {
+            height: 320px;
+        }
         img{
             width: 100%;
             height: 100%;

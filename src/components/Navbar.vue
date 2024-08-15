@@ -30,17 +30,17 @@
                     <div class="list">
                         <ul class="navbar-nav">
                             <li class="nav-item">
-                                <router-link class="nav-link" to="/items">Collections
+                                <router-link class="nav-link" to="/items" @click="closeSidebar">Collections
                                     <font-awesome-icon class="arrow" icon="fas fa-arrow-right"/>
                                 </router-link>
                             </li>
                             <li class="nav-item">
-                                <router-link class="nav-link" to="/articles">Topics
+                                <router-link class="nav-link" to="/articles" @click="closeSidebar">Topics
                                     <font-awesome-icon class="arrow" icon="fas fa-arrow-right"/>
                                 </router-link>
                             </li>
                             <li class="nav-item">
-                                <router-link class="nav-link" to="/about">About us
+                                <router-link class="nav-link" to="/about" @click="closeSidebar">About us
                                     <font-awesome-icon class="arrow" icon="fas fa-arrow-right"/>
                                 </router-link>
                             </li>

@@ -11,8 +11,19 @@
 .product-navigation{
     .navigation {
         display: flex;
+        align-items: center;
+        flex-wrap: wrap;
+        @include tablet-landscape {
+            justify-content: center;
+        }
+        @include tablet-portrait {
+            justify-content: center;
+        }
+        @include mobile {
+            justify-content: center;
+        }
         .breadcrumb{
-            margin-top: 2rem;
+            margin-top: .5rem;
         }
         .category{
             margin: auto;

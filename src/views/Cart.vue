@@ -1,4 +1,5 @@
 <template>
+    <Loading :active="isLoading"></Loading>
     <div class="cart">
         <div class="container">
             <div class="cart-function">
@@ -154,15 +155,18 @@ export default {
           address: ''
         },
         message: ''
-      }
+      },
+      isLoading: false
     }
   },
   inject: ['emitter'],
   methods: {
     getCart () {
       const api = `${process.env.VUE_APP_API}api/${process.env.VUE_APP_PATH}/cart`
+      this.isLoading = true
       this.$http.get(api).then((res) => {
-        console.log('API Response', res.data)
+        this.isLoading = false
+        // console.log('API Response', res.data)
         if (res.data.data && res.data.data.carts) {
           this.cart = res.data.data
         } else {
@@ -177,7 +181,9 @@ export default {
         product_id: item.product_id,
         qty: item.qty
       }
+      this.isLoading = true
       this.$http.put(api, { data: cart }).then((res) => {
+        this.isLoading = false
         // console.log(res.data)
         this.status.loadingItem = ''
         this.getCart()
@@ -188,7 +194,9 @@ export default {
       // console.log(item)
       this.status.loadingItem = item
       const api = `${process.env.VUE_APP_API}api/${process.env.VUE_APP_PATH}/cart/${item}`
+      this.isLoading = true
       this.$http.delete(api).then((res) => {
+        this.isLoading = false
         // console.log('API Response', res.data)
         this.status.loadingItem = ''
         this.getCart()
@@ -196,7 +204,9 @@ export default {
     },
     removeAllCartItem () {
       const api = `${process.env.VUE_APP_API}api/${process.env.VUE_APP_PATH}/carts`
+      this.isLoading = true
       this.$http.delete(api).then((res) => {
+        this.isLoading = false
         this.getCart()
         // console.log(res)
       })
@@ -206,7 +216,9 @@ export default {
       const coupon = {
         code: this.coupon_code
       }
+      this.isLoading = true
       this.$http.post(api, { data: coupon }).then((res) => {
+        this.isLoading = false
         console.log(res.data)
         this.getCart()
       })
@@ -214,7 +226,9 @@ export default {
     createOrder () {
       const api = `${process.env.VUE_APP_API}api/${process.env.VUE_APP_PATH}/order`
       const order = this.form
+      this.isLoading = true
       this.$http.post(api, { data: order }).then((res) => {
+        this.isLoading = false
         console.log(res)
       })
     }

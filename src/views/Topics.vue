@@ -1,4 +1,5 @@
 <template>
+    <Loading :active="isLoading"></Loading>
     <div class="cover">
         <div class="container">
         <h1 class="title">Topics</h1>
@@ -19,7 +20,7 @@
     <div class="articles-list">
         <div class="container">
             <div class="row">
-                <div class="col-3 my-5" v-for="(item, key) in articles" :key="key">
+                <div class="col-sm-6 col-md-4 col-lg-4 col-xl-3 my-3 my-sm-3 my-md-5" v-for="(item, key) in articles" :key="key">
                     <a @click="getArticle(item.id)">
                         <div class="card">
                             <div class="card-img-top rounded border-0" :style="{backgroundImage: `url(${item.imageUrl})`}"></div>
@@ -49,7 +50,8 @@ export default ({
   data () {
     return {
       articles: [],
-      pagination: {}
+      pagination: {},
+      isLoading: false
     }
   },
   component: {
@@ -58,8 +60,10 @@ export default ({
   methods: {
     getArticles (page = 1) {
       const api = `${process.env.VUE_APP_API}api/${process.env.VUE_APP_PATH}/articles?page=${page}`
+      this.isLoading = true
       this.$http.get(api).then((res) => {
-        console.log(res.data)
+        this.isLoading = false
+        // console.log(res.data)
         this.articles = res.data.articles
         this.pagination = res.data.pagination
       }

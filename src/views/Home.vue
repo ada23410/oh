@@ -1,4 +1,5 @@
 <template>
+  <Loading :active="isLoading"></Loading>
   <div class="main">
       <div class="container">
           <div class="recommend">
@@ -194,7 +195,8 @@ export default {
       products: [],
       pagination: {},
       articles: [],
-      favorites: []
+      favorites: [],
+      isLoading: false
     }
   },
   inject: ['emitter'],
@@ -228,7 +230,9 @@ export default {
     },
     getProducts () {
       const api = `${process.env.VUE_APP_API}api/${process.env.VUE_APP_PATH}/products/all`
+      this.isLoading = true
       this.$http.get(api).then((res) => {
+        this.isLoading = false
         // console.log(res.data)
         this.products = res.data.products
       })
@@ -238,7 +242,9 @@ export default {
     },
     getArticles () {
       const api = `${process.env.VUE_APP_API}api/${process.env.VUE_APP_PATH}/articles`
+      this.isLoading = true
       this.$http.get(api).then((res) => {
+        this.isLoading = false
         // console.log(res.data.articles)
         this.articles = res.data.articles
       })
@@ -256,12 +262,24 @@ export default {
       this.$http.post(api, { data: cart }).then((res) => {
         console.log(res.data)
         console.log('發出事件', res.data)
-        this.emitter.emit('addCart', res.data)
+        if (res.data.success) {
+          this.emitter.emit('addCart', res.data)
+          this.emitter.emit('push-message', {
+            style: 'success',
+            title: '商品已加入更物車！'
+          })
+        } else {
+          throw new Error(res.data.message || '加入商品失敗！')
+        }
       })
     },
     toggleFavorite (item) {
       console.log(item.id)
       this.favorites = favorites.toggleFavorite(this.favorites, item.id)
+      this.emitter.emit('push-message', {
+        style: 'success',
+        title: '已加入最愛！'
+      })
     }
   },
   mounted () {

@@ -1,7 +1,7 @@
 <!-- eslint-disable no-unused-vars -->
 <!-- eslint-disable vue/multi-word-component-names -->
 <template>
-    <NavbarDashboard></NavbarDashboard>
+      <NavbarDashboard></NavbarDashboard>
       <div class="container-fluid mt-3 position-relative">
         <ToastMessage></ToastMessage>
         <router-view/>
