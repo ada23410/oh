@@ -190,14 +190,14 @@ html, body {
                 display: block;
                 text-align: center;
                 padding: 1rem;
-                --bg: #000;
+                --bg: #000000;
                 --hover-bg: #1b1b1b;
                 --hover-text: #ffffff;
                 color: #fff;
                 cursor: pointer;
                 border: 1px solid var(--bg);
                 background: var(--bg);
-                transition: 0.2s;
+                transition: 0.5s;
                 &:hover {
                     color: var(--hover-text);
                     transform: translate(-0.25rem, -0.25rem);
