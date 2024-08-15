@@ -34,12 +34,19 @@ html, body {
                     position: relative;
                     display: inline-block;
                     height: 450px; 
-                    background-size: cover; 
-                    background-position: center;
-                    border-radius: 0;
                     cursor: pointer;
+                    overflow: hidden; 
                     @include mobile {
                         height: 320px; 
+                    }
+                    img {
+                        width: 100%;
+                        height: 100%;
+                        object-fit: cover;
+                        transition: transform 0.3s ease; 
+                    }
+                    &:hover img {
+                        transform: scale(1.1); 
                     }
                 }
                 .card-img-top::after {
@@ -222,16 +229,23 @@ html, body {
             }
             .card{
                 border: none;
-                position: relative;
                 .card-img-top {
                     position: relative;
                     display: inline-block;
                     height: 300px; 
-                    background-size: cover; 
-                    background-position: center;
-                    border-radius: 0;
+                    overflow: hidden;  
+                    cursor: pointer;
                     @include mobile {
-                        height: 250px; 
+                        height: 300px; 
+                    }
+                    img {
+                        width: 100%;
+                        height: 100%;
+                        object-fit: cover;
+                        transition: transform 0.3s ease; 
+                    }
+                    &:hover img {
+                        transform: scale(1.1); 
                     }
                 }
                 .card-img-top::after {

@@ -32,7 +32,9 @@
             <div class="card">
               <a @click="getProduct(item.id)">
                 <h5 class="card-title">{{ item.title }}</h5>
-                <div class="card-img-top rounded border-0" :style="{backgroundImage: `url(${item.imageUrl})`}"></div>
+                <div class="card-img-top rounded border-0">
+                  <img :src="item.imageUrl">
+                </div>
               </a>
               <div class="card-body">
                 <div class="price">NT${{ item.origin_price }}</div>

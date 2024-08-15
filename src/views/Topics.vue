@@ -23,7 +23,9 @@
                 <div class="col-sm-6 col-md-4 col-lg-4 col-xl-3 my-3 my-sm-3 my-md-5" v-for="(item, key) in articles" :key="key">
                     <a @click="getArticle(item.id)">
                         <div class="card">
-                            <div class="card-img-top rounded border-0" :style="{backgroundImage: `url(${item.imageUrl})`}"></div>
+                            <div class="card-img-top rounded border-0">
+                              <img :src="item.imageUrl">
+                            </div>
                             <div class="card-body">
                                 <h5 class="card-title">{{ item.title }}</h5>
                                 <div class="card-text">
