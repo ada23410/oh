@@ -71,10 +71,10 @@
           <div class="content">
             <p>專門銷售各種飲料（如手工啤酒、精釀咖啡、茶飲等）和醃漬物（如醃黃瓜pickles、橄欖black olives、泡菜kimchi等）。這些產品既可獨立享用，也可作為搭配美食的佳品。</p>
           </div>
-          <a class="call-to-action">
+          <router-link class="call-to-action" to="/about">
             查看資訊
             <font-awesome-icon class="bars" icon="fas fa-arrow-right"/>
-          </a>
+          </router-link>
         </div>
       </div>
     </div>

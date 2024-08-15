@@ -20,7 +20,7 @@
                 </div>
                 <div class="col mb-3">
                     <ul class="nav flex-column">
-                        <li class="nav-item border-bottom border-secondary-subtle"><a href="#" class="nav-link p-0">關於我們</a></li>
+                        <li class="nav-item border-bottom border-secondary-subtle"><router-link href="#" class="nav-link p-0" to="/about">關於我們</router-link></li>
                         <li class="nav-item border-bottom border-secondary-subtle"><a href="#" class="nav-link p-0">最新消息</a></li>
                         <li class="nav-item border-bottom border-secondary-subtle"><a href="#" class="nav-link p-0">營利事業登記</a></li>
                         <li class="nav-item border-bottom border-secondary-subtle"><a href="#" class="nav-link p-0">版權聲明</a></li>
@@ -29,7 +29,7 @@
                 <div class="col mb-3">
                     <ul class="nav flex-column">
                         <li class="nav-item p-0"><a href="#" class="nav-link call-to-action mb-3">聯繫我們<font-awesome-icon class="bars" icon="fas fa-arrow-right"/></a></li>
-                        <li class="nav-item p-0"><a href="#" class="nav-link call-to-action mb-3">管理員登入<font-awesome-icon class="bars" icon="fas fa-arrow-right"/></a></li>
+                        <li class="nav-item p-0"><router-link class="nav-link call-to-action mb-3" to="/login">管理員登入<font-awesome-icon class="bars" icon="fas fa-arrow-right"/></router-link></li>
                     </ul>
                 </div>
             </footer>

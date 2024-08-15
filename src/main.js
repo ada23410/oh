@@ -17,7 +17,7 @@ import { required, email } from '@vee-validate/rules'
 import { localize, setLocale } from '@vee-validate/i18n'
 import zhTW from '@vee-validate/i18n/dist/locale/zh_TW.json'
 
-// 定义验证规则
+// 驗證規則
 defineRule('required', required)
 defineRule('email', email)
 
@@ -25,7 +25,7 @@ configure({
   generateMessage: localize({ zh_TW: zhTW }), // 载入繁体中文语系
   validateOnInput: true // 当输入任何内容直接进行验证
 })
-// 设置默认语系
+// 默認語言
 setLocale('zh_TW')
 
 const firebaseConfig = {

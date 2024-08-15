@@ -8,7 +8,7 @@
                 </div>
                 <div class="menu">Menu</div>
             </button>
-            <a class="navbar-brand align-items-center" href="#">ooh</a>
+            <router-link class="navbar-brand align-items-center" to="/home">ooh</router-link>
             <router-link class="text-decoration-none" to="/cart">
                 <div class="user-cart">
                     <div class="user-cart-name">購物車</div>
