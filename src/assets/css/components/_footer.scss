@@ -37,11 +37,24 @@
                 color: $white;
                 font-size: .9rem;
                 text-decoration: none;
-                background-color: #393838;
+                background-color: transparent;
+                border: 1.5px solid $white;
                 display: block;
                 text-align: center;
                 padding: 1rem;
             }
         }
+        .info {
+            padding: .1rem;
+            letter-spacing: 1px;
+            font-size: .9rem;
+        }
+    }
+    .logo {
+        width: 180px;
+        height: 100%;
+    }
+    .copy-right {
+        font-size: .8rem;
     }
 }

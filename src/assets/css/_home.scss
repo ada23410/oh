@@ -6,16 +6,28 @@ html, body {
 .main{
     .recommend{
         .marquee{
-            border-top:2px solid $blue;
-            border-bottom:1.5px solid $blue;
+            border-top: 2px solid $blue;
+            border-bottom: 1.5px solid $blue;
             padding: 1rem 0;
-            .marquee-item{
-                .item{
-                    font-size: 21px;
-                    font-weight: $font-weight-semibold;
-                    margin-right: 1rem;
-                    width: 100%;
+            overflow: hidden;
+            .swiper {
+                width: 100%;
+                height: auto;
+                .swiper-wrapper {
+                    transition-timing-function: linear;
+                    align-items: center; 
+                    .swiper-slide {
+                        width: auto !important;
+                        font-size: 1rem;
+                        font-weight: $font-weight-semibold;
+                        margin-right: 1rem;
+                    }
                 }
+            }
+            .swiper-pagination,
+            .swiper-button-next,
+            .swiper-button-prev {
+                display: none;
             }
         }
         .recommend-product{

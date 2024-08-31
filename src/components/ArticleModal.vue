@@ -52,7 +52,7 @@
                     <div class="mb-3">
                         <label for="create_at">建立日期</label>
                         <input type="date" class="form-control" id="create_at"
-                            v-model="tempArticle.create_at" @change="convertDate">
+                            v-model="create_at">
                     </div>
                     <div class="mb-3">
                         <div class="form-check">
@@ -69,7 +69,7 @@
         <div class="modal-footer">
           <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">取消</button>
           <button type="button" class="btn btn-primary"
-              @click="convertDate; $emit('update-article', tempArticle)">確認
+              @click="$emit('update-article', tempArticle)">確認
           </button>
         </div>
       </div>
@@ -91,14 +91,17 @@ export default ({
   watch: {
     article () {
       this.tempArticle = this.article
+      // if (this.tempArticle.create_at) {
+      //   this.tempArticle.create_at = this.convertTimeToString(this.tempArticle.create_at)
+      // }
     }
   },
   data () {
     return {
       tempArticle: {
-        create_at: 0,
         isPublic: false
-      }
+      },
+      create_at: ''
     }
   },
   methods: {

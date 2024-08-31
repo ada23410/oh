@@ -4,14 +4,27 @@
       <div class="container">
           <div class="recommend">
               <div class="marquee">
-                  <div class="marquee-item">
-                      <span  @mouseover="marqueeStop" @mouseout="marqueeMove" class="item">{{ message }}</span>
-                  </div>
+                <swiper
+                  :modules="modules"
+                  :slides-per-view="'auto'"
+                  :allow-touch-move="false"
+                  :autoplay="{
+                    delay: 0,
+                    disableOnInteraction: false
+                  }"
+                  :loop="true"
+                  :speed="8000"
+                  @swiper="onSwiper"
+                  @slideChange="onSlideChange"
+                >
+                  <swiper-slide v-for="(slide, index) in slides" :key="index">
+                    {{ slide.content }}
+                  </swiper-slide>
+                </swiper>
               </div>
               <div class="recommend-product mt-5">
                   <swiper class="mySwiper" :modules="modules"
                       :slidesPerView="'auto'"
-                      :pagination="{ clickable: true }"
                       :breakpoints="{
                         '320': {
                           slidesPerView: 1,
@@ -70,7 +83,7 @@
         </div>
         <div class="about-us-content">
           <h6 class="tag">#樂活飲食精選</h6>
-          <h3 class="title">oh~賣蔬果店</h3>
+          <h3 class="title">OH MY蔬果店</h3>
           <div class="content">
             <p>專門銷售各種飲料（如手工啤酒、精釀咖啡、茶飲等）和醃漬物（如醃黃瓜pickles、橄欖black olives、泡菜kimchi等）。這些產品既可獨立享用，也可作為搭配美食的佳品。</p>
           </div>
@@ -92,7 +105,6 @@
         <div class="topics-content">
           <swiper class="mySwiper" :modules="modules"
                 :slidesPerView="'auto'"
-                :pagination="{ clickable: true }"
                 :breakpoints="{
                   '320': {
                     slidesPerView: 1,
@@ -149,7 +161,7 @@
             <img src="../../public/image/about_cover.png" alt="shop-image">
           </div>
           <div class="shop-information">
-            <div class="name">oh~賣蔬果店</div>
+            <div class="name">OH MY蔬果店</div>
             <div class="opening-hours">
               <span class="subtitle">營業時間</span>
               <span class="content">全年無休，每日09:00 - 21:00</span>
@@ -179,7 +191,7 @@
 
 <script>
 import { Swiper, SwiperSlide } from 'swiper/vue'
-import { Pagination, A11y } from 'swiper/modules'
+import { Pagination, Autoplay } from 'swiper/modules'
 import favorites from '@/methods/favorite'
 import 'swiper/css'
 import 'swiper/css/pagination'
@@ -191,53 +203,34 @@ export default {
   },
   data () {
     return {
-      message: 'NEW OPEN ',
-      intervalId: null,
-      modules: [],
-      onSwiper: null,
-      onSlideChange: null,
+      modules: [Pagination, Autoplay],
+      slides: [
+        { content: 'NEW OPEN 消費金額超過1,000免運費，查看詳情看更多優惠～' },
+        { content: 'NEW OPEN 消費金額超過1,000免運費，查看詳情看更多優惠～' },
+        { content: 'NEW OPEN 消費金額超過1,000免運費，查看詳情看更多優惠～' },
+        { content: 'NEW OPEN 消費金額超過1,000免運費，查看詳情看更多優惠～' }
+      ],
       products: [],
-      pagination: {},
       articles: [],
       favorites: [],
-      isLoading: false
+      isLoading: false,
+      message: 'NEW OPEN 消費金額超過1,000免運費，查看詳情看更多優惠～',
+      containerWidth: 300 // 容器寬度，單位為像素
     }
   },
   inject: ['emitter'],
   methods: {
-    // 跑馬燈
-    marqueeMove () {
-      if (this.intervalId != null) return
-      this.intervalId = setInterval(() => {
-        const start = this.message.substring(0, 1)
-        const end = this.message.substring(1)
-        this.message = end + start
-      }, 100)
+    onSwiper (swiper) {
+      console.log(swiper)
     },
-    marqueeStop () {
-      clearInterval(this.intervalId)
-      this.intervalId = null
-    },
-    // Swiper
-    setup () {
-      const onSwiper = (swiper) => {
-        console.log(swiper)
-      }
-      const onSlideChange = () => {
-        console.log('slide change')
-      }
-      return {
-        onSwiper,
-        onSlideChange,
-        modules: [Pagination, A11y]
-      }
+    onSlideChange () {
+      console.log('slide change')
     },
     getProducts () {
       const api = `${process.env.VUE_APP_API}api/${process.env.VUE_APP_PATH}/products/all`
       this.isLoading = true
       this.$http.get(api).then((res) => {
         this.isLoading = false
-        // console.log(res.data)
         this.products = res.data.products
       })
     },
@@ -249,7 +242,6 @@ export default {
       this.isLoading = true
       this.$http.get(api).then((res) => {
         this.isLoading = false
-        // console.log(res.data.articles)
         this.articles = res.data.articles
       })
     },
@@ -264,13 +256,11 @@ export default {
         qty: 1
       }
       this.$http.post(api, { data: cart }).then((res) => {
-        console.log(res.data)
-        console.log('發出事件', res.data)
         if (res.data.success) {
           this.emitter.emit('addCart', res.data)
           this.emitter.emit('push-message', {
             style: 'success',
-            title: '商品已加入更物車！'
+            title: '商品已加入購物車！'
           })
         } else {
           throw new Error(res.data.message || '加入商品失敗！')
@@ -284,13 +274,15 @@ export default {
         style: 'success',
         title: '已加入最愛！'
       })
+    },
+    initMarquee () {
+      console.log('Marquee initialized')
     }
   },
   mounted () {
-    this.setup() // 确保在mounted生命周期钩子中调用
+    this.initMarquee()
   },
   created () {
-    // console.log(process.env.VUE_APP_API, process.env.VUE_APP_PATH)
     this.favorites = favorites.loadFavorites()
     this.getProducts()
     this.getArticles()
