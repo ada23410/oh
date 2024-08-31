@@ -32,18 +32,36 @@
                     <div class="list">
                         <ul class="navbar-nav">
                             <li class="nav-item">
-                                <router-link class="nav-link" to="/items" @click="closeSidebar">Collections
-                                    <font-awesome-icon class="arrow" icon="fas fa-arrow-right"/>
+                                <router-link class="nav-link" to="/items" @click="closeSidebar">
+                                    <div class="link-wrap">
+                                      <div class="link-title">
+                                        <div class="cn">商品列表</div>
+                                        <div class="en">Collections</div>
+                                      </div>
+                                      <font-awesome-icon class="arrow" icon="fas fa-arrow-right"/>
+                                    </div>
                                 </router-link>
                             </li>
                             <li class="nav-item">
-                                <router-link class="nav-link" to="/articles" @click="closeSidebar">Topics
-                                    <font-awesome-icon class="arrow" icon="fas fa-arrow-right"/>
+                                <router-link class="nav-link" to="/articles" @click="closeSidebar">
+                                  <div class="link-wrap">
+                                      <div class="link-title">
+                                        <div class="cn">文章列表</div>
+                                        <div class="en">Topics</div>
+                                      </div>
+                                      <font-awesome-icon class="arrow" icon="fas fa-arrow-right"/>
+                                    </div>
                                 </router-link>
                             </li>
                             <li class="nav-item">
-                                <router-link class="nav-link" to="/about" @click="closeSidebar">About us
-                                    <font-awesome-icon class="arrow" icon="fas fa-arrow-right"/>
+                                <router-link class="nav-link" to="/about" @click="closeSidebar">
+                                  <div class="link-wrap">
+                                      <div class="link-title">
+                                        <div class="cn">關於我們</div>
+                                        <div class="en">About us</div>
+                                      </div>
+                                      <font-awesome-icon class="arrow" icon="fas fa-arrow-right"/>
+                                    </div>
                                 </router-link>
                             </li>
                         </ul>

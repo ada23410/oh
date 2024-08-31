@@ -4,9 +4,18 @@
         <div class="container">
             <div aria-label="breadcrumb">
                 <ol class="breadcrumb">
-                    <li class="breadcrumb-item"><a href="#">Home</a></li>
-                    <li class="breadcrumb-item"><a href="#">Collections</a></li>
-                    <li class="breadcrumb-item active" aria-current="page">{{ product.title }}</li>
+                  <li class="breadcrumb-item">
+                    <router-link to="/">Home</router-link>
+                  </li>
+                  <li class="breadcrumb-item">
+                    <router-link to="/items">Collections</router-link>
+                  </li>
+                  <li v-if="product" class="breadcrumb-item active" aria-current="page">
+                    {{ product.title }}
+                  </li>
+                  <li v-else class="breadcrumb-item active" aria-current="page">
+                    Loading...
+                  </li>
                 </ol>
             </div>
             <div class="row">

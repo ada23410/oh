@@ -121,9 +121,21 @@ nav {
                     .nav-link{
                         font-size: 21px;
                         color: $white;
-                        .arrow{
-                            font-size: 16px;
-                            color: $white;
+                        .link-wrap {
+                            display: flex;
+                            align-items: center;
+                            justify-content: center;
+                            .link-title {
+                                margin-right: .5rem;
+                                .cn {
+                                    font-size: 1rem;
+                                    letter-spacing: 1px;
+                                }
+                            }
+                            .arrow{
+                                font-size: 16px;
+                                color: $white;
+                            }
                         }
                     }
                 }
