@@ -36,12 +36,35 @@
         border-radius: 5px;
     }
     .information {
-        .title {
-            color: $blue;
-            font-size: 1.5rem;
+        .category {
+            display: inline-block;
+            color: $white;
+            font-size: .8rem;
             font-weight: 500;
             letter-spacing: .1rem;
-            margin-bottom: .1rem;
+            background-color: $blue;
+            padding: .3rem .5rem;
+        }
+        .title-wrap {
+            display: flex;
+            align-items: center;
+            .title {
+                color: $blue;
+                font-size: 1.5rem;
+                font-weight: 500;
+                letter-spacing: .1rem;
+                margin: .5rem .2rem .5rem;
+            }
+            .add-to-favorite {
+                width: 10%;
+                color: $blue;
+                font-size: 1rem;
+                background-color: $white;
+                cursor: pointer;
+                .like {
+                    color: $red;
+                }
+            }
         }
         .content{
             color: $blue;
@@ -52,6 +75,48 @@
             line-height: 1.5rem;
             margin-bottom: .1rem;
         }
+        .origin-price{
+            color: $gray-800;
+            font-size: 1rem;
+            font-weight: 500;
+            letter-spacing: .1rem;
+            margin-bottom: .1rem;
+            text-decoration:line-through;
+        }
+        .price{
+            color: $blue;
+            font-size: 1.5rem;
+            font-weight: 700;
+            letter-spacing: .1rem;
+            margin-bottom: .1rem;
+        }
+        .add-content {
+            display: flex;
+            align-items: center;
+            .input-group {
+                margin-right: .3rem;
+            }
+            .add-to-cart{
+                width: 90%;
+                color: $white;
+                font-size: 1rem;
+                background-color: $blue;
+                border: transparent;
+                text-align: center;
+                padding: .8rem;
+            }
+        }
+    }
+    .content {
+        .title {
+            color: $blue;
+            font-size: 1.5rem;
+            font-weight: 500;
+            letter-spacing: .1rem;
+            margin-bottom: .1rem;
+            border-bottom: 1.5px solid $blue;
+            padding: 2rem 0 1rem 0;
+        }
         .description{
             color: $blue;
             font-size: .9rem;
@@ -60,30 +125,88 @@
             letter-spacing: .1rem;
             line-height: 1.5rem;
             margin-bottom: 1rem;
+            .subtitle {
+                font-size: .9rem;
+                font-weight: 500;
+                letter-spacing: .05em;
+                line-height: 1;
+                padding: .8rem 0;
+                margin: .5rem 0 0;
+            }
         }
-        .origin-price{
+    }
+    .related-product {
+        margin-top: 3rem;
+        .title {
             color: $blue;
-            font-size: .9rem;
+            font-size: 1.5rem;
             font-weight: 500;
             letter-spacing: .1rem;
             margin-bottom: .1rem;
-            text-decoration:line-through;
+            border-bottom: 1.5px solid $blue;
+            padding: 2rem 0 1rem 0;
         }
-        .price{
-            color: $blue;
-            font-size: 1.2rem;
-            font-weight: 500;
-            letter-spacing: .1rem;
-            margin-bottom: .1rem;
-        }
-        .add-to-cart{
-            width: 100%;
-            color: $white;
-            font-size: 1rem;
-            background-color: $blue;
-            border: transparent;
-            text-align: center;
-            padding: 1rem;
+        .card{
+            margin-top: 2rem;
+            border: none;
+            position: relative;
+            .card-title{
+                position: absolute;
+                padding: 1rem;
+                font-size: 18px;
+                font-weight: 400;
+                color: $white;
+                z-index: 1;
+            }
+            .card-img-top {
+                position: relative;
+                display: inline-block;
+                height: 320px; 
+                cursor: pointer;
+                overflow: hidden; 
+                @include mobile {
+                    height: 320px; 
+                }
+                img {
+                    width: 100%;
+                    height: 100%;
+                    object-fit: cover;
+                    transition: transform 0.3s ease; 
+                }
+                &:hover img {
+                    transform: scale(1.1); 
+                }
+            }
+            .card-img-top::after {
+                content: '';
+                position: absolute;
+                top: 0;
+                right: 0;
+                bottom: 0;
+                left: 0;
+                background: rgba(181, 181, 181, 0.5); 
+                mix-blend-mode: multiply;
+                border: none;
+                border-radius: 5px;
+            }
+            .card-body{
+                display: flex;
+                justify-content: space-between;
+                align-items: center;
+                padding: .5rem;
+                .price{
+                    font-weight: 500;
+                }
+                .add-to-cart {
+                    cursor: pointer;
+                }
+                .add-to-favorite {
+                    cursor: pointer;
+                    .like {
+                        color: $red;
+                    }
+                }
+            }
         }
     }
 }

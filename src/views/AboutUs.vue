@@ -111,7 +111,7 @@ export default {
                   start: 'top 20%',
                   end: 'bottom 80%',
                   toggleActions: 'play none none none',
-                  markers: true
+                  markers: false
                 }
               }
             )

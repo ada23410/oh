@@ -166,7 +166,7 @@ export default {
       this.isLoading = true
       this.$http.get(api).then((res) => {
         this.isLoading = false
-        // console.log('API Response', res.data)
+        console.log('API Response', res.data)
         if (res.data.data && res.data.data.carts) {
           this.cart = res.data.data
         } else {
