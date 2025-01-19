@@ -18,10 +18,14 @@
                 <div class="col mb-3">
                     <ul class="nav flex-column">
                         <li class="nav-item border-bottom border-secondary-subtle"><router-link class="nav-link p-0" to="/items">全部商品</router-link></li>
-                        <li class="nav-item"><a href="#" class="nav-link p-0">手工啤酒系列</a></li>
-                        <li class="nav-item"><a href="#" class="nav-link p-0">醃漬食品系列</a></li>
-                        <li class="nav-item"><a href="#" class="nav-link p-0">健康小食系列</a></li>
-                        <li class="nav-item"><a href="#" class="nav-link p-0">有機蔬果系列</a></li>
+                        <li class="nav-item" v-for="item in categoryData" :key="item">
+                            <router-link
+                                class="nav-link p-0"
+                                :to="{ path: '/items', query: { category: item } }"
+                            >
+                                {{ item }}
+                            </router-link>
+                        </li>
                     </ul>
                 </div>
                 <div class="col mb-3">
@@ -42,3 +46,43 @@
         </div>
     </div>
 </template>
+
+<script>
+export default {
+  data () {
+    return {
+      products: [],
+      filter: '',
+      currentPage: 1,
+      perPage: 9,
+      filteredProducts: [],
+      pagination: { current_page: 1, total_pages: 1, has_next: false, has_pre: false }
+    }
+  },
+  methods: {
+    getProducts () {
+      const api = `${process.env.VUE_APP_API}api/${process.env.VUE_APP_PATH}/products/all`
+      this.$http.get(api).then((res) => {
+        if (res.data.success) {
+          this.products = res.data.products
+        }
+      })
+    }
+  },
+  computed: {
+    categoryData () {
+      if (!this.products || this.products.length === 0) {
+        return []
+      }
+      // 提取所有產品的分類
+      const allCategories = this.products.map(product => product.category)
+      // 使用 Set 去除重複的分類並轉換回陣列
+      const uniqueCategories = Array.from(new Set(allCategories))
+      return uniqueCategories
+    }
+  },
+  created () {
+    this.getProducts()
+  }
+}
+</script>

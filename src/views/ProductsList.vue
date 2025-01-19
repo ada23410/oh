@@ -96,6 +96,7 @@ export default {
     setFilter (category) {
       this.filter = category
       this.currentPage = 1
+      this.$router.push({ query: { category } })
       this.updateProducts()
     },
     prev () {
@@ -122,10 +123,14 @@ export default {
       })
     },
     updateProducts () {
-      if (this.filter === '') {
-        this.filteredProducts = this.products
+      // 獲取當前分類篩選條件
+      const categoryFilter = this.filter || this.$route.query.category || ''
+
+      // 篩選產品列表
+      if (categoryFilter) {
+        this.filteredProducts = this.products.filter(product => product.category === categoryFilter)
       } else {
-        this.filteredProducts = this.products.filter(item => item.category === this.filter)
+        this.filteredProducts = this.products // 顯示全部產品
       }
 
       const start = (this.currentPage - 1) * this.perPage
@@ -175,6 +180,14 @@ export default {
       const start = (this.currentPage - 1) * this.perPage
       const end = start + this.perPage
       return this.filteredProducts.slice(start, end)
+    }
+  },
+  watch: {
+    // 當路由的查詢參數變化時，更新分類篩選
+    '$route.query.category' (newCategory) {
+      this.filter = newCategory || ''
+      this.currentPage = 1
+      this.updateProducts()
     }
   },
   created () {
