@@ -29,23 +29,23 @@
     <div class="container">
       <div class="row">
         <div class="col-12 col-sm-6 col-md-4 my-3 my-sm-3 my-md-5" v-for="item in paginatedProducts" :key="item.id">
-            <div class="card">
-              <a @click="getProduct(item.id)">
-                <h5 class="card-title">{{ item.title }}</h5>
-                <div class="card-img-top rounded border-0">
-                  <img :src="item.imageUrl">
-                </div>
-              </a>
-              <div class="card-body">
-                <div class="price">NT${{ item.origin_price }}</div>
-                <div class="add-to-cart" @click="addCart(item.id)">
-                  <font-awesome-icon class="bars me-2" icon="fas fa-bag-shopping"/>放入袋中
-                </div>
-                <div class="add-to-favorite"  @click="toggleFavorite(item)">
-                  <font-awesome-icon :icon="['fas', 'heart']"  :class="{ 'like': favorites.includes(item.id) }"/>
-                </div>
+          <div class="card">
+            <a @click="getProduct(item.id)">
+              <h5 class="card-title">{{ item.title }}</h5>
+              <div class="card-img-top rounded border-0">
+                <img :src="item.imageUrl">
+              </div>
+            </a>
+            <div class="card-body">
+              <div class="price">NT${{ item.origin_price }}</div>
+              <div class="add-to-cart" @click="addCart(item.id)">
+                <font-awesome-icon class="bars me-2" icon="fas fa-bag-shopping"/>放入袋中
+              </div>
+              <div class="add-to-favorite" @click="toggleFavorite(item)">
+                <font-awesome-icon :icon="['fas', 'heart']" :class="{ 'like': favorites.includes(item.id) }"/>
               </div>
             </div>
+          </div>
         </div>
       </div>
       <Pagination :pages="pagination" @emit-pages="goToPage" />
@@ -64,7 +64,7 @@ export default {
   data () {
     return {
       products: [],
-      filter: '',
+      filter: '', // 當前篩選的分類
       currentPage: 1,
       perPage: 9,
       filteredProducts: [],
@@ -81,7 +81,6 @@ export default {
       this.$http.get(api).then((res) => {
         this.isLoading = false
         if (res.data.success) {
-          console.log(res.data)
           this.products = res.data.products
           this.updateProducts()
         }
@@ -96,20 +95,8 @@ export default {
     setFilter (category) {
       this.filter = category
       this.currentPage = 1
+      // 更新路由的查詢參數
       this.$router.push({ query: { category } })
-      this.updateProducts()
-    },
-    prev () {
-      if (this.currentPage > 1) {
-        this.currentPage--
-        this.updateProducts()
-      }
-    },
-    next () {
-      if (this.currentPage < this.totalPages) {
-        this.currentPage++
-        this.updateProducts()
-      }
     },
     goToPage (page) {
       this.currentPage = page
@@ -123,16 +110,17 @@ export default {
       })
     },
     updateProducts () {
-      // 獲取當前分類篩選條件
+      // 獲取篩選條件
       const categoryFilter = this.filter || this.$route.query.category || ''
 
-      // 篩選產品列表
+      // 根據篩選條件篩選產品
       if (categoryFilter) {
         this.filteredProducts = this.products.filter(product => product.category === categoryFilter)
       } else {
-        this.filteredProducts = this.products // 顯示全部產品
+        this.filteredProducts = this.products // 如果沒有篩選條件，顯示全部產品
       }
 
+      // 分頁邏輯
       const start = (this.currentPage - 1) * this.perPage
       const end = start + this.perPage
       this.pagination.total_pages = Math.ceil(this.filteredProducts.length / this.perPage)
@@ -141,20 +129,14 @@ export default {
       this.paginatedProducts = this.filteredProducts.slice(start, end)
     },
     addCart (productId) {
-      console.log(productId)
       const api = `${process.env.VUE_APP_API}api/${process.env.VUE_APP_PATH}/cart`
-      const cart = {
-        product_id: productId,
-        qty: 1
-      }
+      const cart = { product_id: productId, qty: 1 }
       this.$http.post(api, { data: cart }).then((res) => {
         if (res.data.success) {
-          console.log(res.data)
-          console.log('發出事件', res.data)
           this.emitter.emit('addCart', res.data)
           this.emitter.emit('push-message', {
             style: 'success',
-            title: '商品已加入更物車！'
+            title: '商品已加入購物車！'
           })
         } else {
           throw new Error(res.data.message || '加入商品失敗！')
@@ -167,11 +149,8 @@ export default {
       if (!this.products || this.products.length === 0) {
         return []
       }
-      // 提取所有產品的分類
       const allCategories = this.products.map(product => product.category)
-      // 使用 Set 去除重複的分類並轉換回陣列
-      const uniqueCategories = Array.from(new Set(allCategories))
-      return uniqueCategories
+      return Array.from(new Set(allCategories))
     },
     totalPages () {
       return this.pagination.total_pages
@@ -192,6 +171,7 @@ export default {
   },
   created () {
     this.favorites = favorites.loadFavorites()
+    this.filter = this.$route.query.category || ''
     this.getProducts()
   }
 }

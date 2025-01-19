@@ -1,4 +1,5 @@
 import { createApp } from 'vue'
+import { createPinia } from 'pinia'
 import App from './App.vue'
 import router from './router'
 import axios from 'axios'
@@ -46,6 +47,7 @@ const analytics = getAnalytics(firebaseApp)
 library.add(fas)
 
 const app = createApp(App)
+const pinia = createPinia()
 
 app.component('font-awesome-icon', FontAwesomeIcon)
 
@@ -57,6 +59,7 @@ app.config.globalProperties.$filters = {
 app.config.globalProperties.$httpMessageState = $httpMessageState
 
 app.use(VueAxios, axios)
+app.use(pinia)
 app.use(router)
 app.component('Loading', Loading)
 app.component('Form', Form)
