@@ -278,9 +278,17 @@ export default {
     initMarquee () {
       console.log('Marquee initialized')
     }
+    // loadAnythingLLMScript () {
+    //   const script = document.createElement('script')
+    //   script.setAttribute('data-embed-id', '9bc6623e-996c-43ed-b5c5-951cec351db1')
+    //   script.setAttribute('data-base-api-url', 'http://localhost:3014/api/embed')
+    //   script.src = 'http://localhost:3014/embed/anythingllm-chat-widget.min.js'
+    //   document.body.appendChild(script)
+    // }
   },
   mounted () {
     this.initMarquee()
+    // this.loadAnythingLLMScript()
   },
   created () {
     this.favorites = favorites.loadFavorites()

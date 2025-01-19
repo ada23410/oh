@@ -81,6 +81,7 @@ export default {
       this.$http.get(api).then((res) => {
         this.isLoading = false
         if (res.data.success) {
+          console.log(res.data)
           this.products = res.data.products
           this.updateProducts()
         }
@@ -158,9 +159,14 @@ export default {
   },
   computed: {
     categoryData () {
-      if (!this.products || this.products.length === 0) return []
-      const categories = this.products.map(product => product.category)
-      return [...new Set(categories)]
+      if (!this.products || this.products.length === 0) {
+        return []
+      }
+      // 提取所有產品的分類
+      const allCategories = this.products.map(product => product.category)
+      // 使用 Set 去除重複的分類並轉換回陣列
+      const uniqueCategories = Array.from(new Set(allCategories))
+      return uniqueCategories
     },
     totalPages () {
       return this.pagination.total_pages
