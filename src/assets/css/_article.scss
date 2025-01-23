@@ -13,14 +13,14 @@
         .article-content {
             margin: 1rem auto;
             .tag {
-                color: $blue;
+                color: $green;
                 font-size: .8rem;
                 font-weight: 400;
                 margin-bottom: .5rem;
-                border: .5px solid $blue;
+                border: .5px solid $green;
                 border-radius: 50px;
                 display: inline-block;
-                padding: .5rem;
+                padding: .4rem .8rem;
             }
             .title {
                 font-size: 2rem;

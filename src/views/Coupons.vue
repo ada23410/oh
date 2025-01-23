@@ -1,38 +1,41 @@
 <!-- eslint-disable vue/multi-word-component-names -->
 <template>
-    <div class="text-end mt-3">
+    <div class="function">
+        <h5>優惠券管理</h5>
         <button class="btn btn-primary" type="button" @click="openModal(true)">新增優惠券</button>
     </div>
-    <table class="table mt-4">
-        <thead>
-            <tr>
-                <th width="120">名稱</th>
-                <th width="120">折扣百分比</th>
-                <th width="120">到期日</th>
-                <th width="100">是否啟用</th>
-                <th width="120">編輯</th>
-            </tr>
-        </thead>
-        <tbody>
-            <tr v-for="(item, key) in coupons" :key="key">
-                <td>{{ item.title }}</td>
-                <td>{{ item.percent }}%</td>
-                <td class="text-right">
-                    {{ $filters.date(item.due_date) }}
-                </td>
-                <td>
-                    <span class="text-success" v-if="item.is_enabled">啟用</span>
-                    <span class="text-mute" v-else>未啟用</span>
-                </td>
-                <td>
-                    <div class="btn-group">
-                    <button class="btn btn-outline-primary btn-sm" @click="openModal(false, item)">編輯</button>
-                    <button class="btn btn-outline-danger btn-sm" @click="openDeleteCouponModal(item)">刪除</button>
-                    </div>
-                </td>
-            </tr>
-        </tbody>
-    </table>
+    <div class="card p-3">
+      <table class="table">
+          <thead>
+              <tr>
+                  <th width="120">名稱</th>
+                  <th width="120">折扣百分比</th>
+                  <th width="120">到期日</th>
+                  <th width="100">是否啟用</th>
+                  <th width="120">編輯</th>
+              </tr>
+          </thead>
+          <tbody>
+              <tr v-for="(item, key) in coupons" :key="key">
+                  <td>{{ item.title }}</td>
+                  <td>{{ item.percent }}%</td>
+                  <td class="text-right">
+                      {{ $filters.date(item.due_date) }}
+                  </td>
+                  <td>
+                      <span class="text-success" v-if="item.is_enabled">啟用</span>
+                      <span class="text-mute" v-else>未啟用</span>
+                  </td>
+                  <td>
+                      <div class="btn-group">
+                      <button class="btn btn-outline-primary btn-sm" @click="openModal(false, item)">編輯</button>
+                      <button class="btn btn-outline-danger btn-sm" @click="openDeleteCouponModal(item)">刪除</button>
+                      </div>
+                  </td>
+              </tr>
+          </tbody>
+      </table>
+    </div>
     <couponModal ref="couponModal" :coupon="tempCoupon" @update-coupon="updateCoupon"></couponModal>
     <deleteCouponModal ref="deleteCouponModal" @confirm-delete="deleteCoupon"></deleteCouponModal>
 </template>

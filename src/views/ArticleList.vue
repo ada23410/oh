@@ -1,41 +1,44 @@
 <template>
-    <div class="text-end mt-3">
+    <div class="function">
+        <h5>文章管理</h5>
         <button class="btn btn-primary" type="button" @click="openModal(true)">新增文章</button>
     </div>
-    <table class="table mt-4">
-        <thead>
-            <tr>
-            <th width="120">標題</th>
-            <th width="120">敘述</th>
-            <th width="120">作者</th>
-            <th width="120">建立日期</th>
-            <th width="100">是否啟用</th>
-            <th width="120">編輯</th>
-            </tr>
-        </thead>
-        <tbody>
-            <tr v-for="(item, key) in articles" :key="key">
-            <td>{{ item.title }}</td>
-            <td>{{ item.description }}</td>
-            <td class="text-right">
-                {{ item.author }}
-            </td>
-            <td class="text-right">
-                {{ $filters.date(item.create_at) }}
-            </td>
-            <td>
-              <span class="text-success" v-if="item.isPublic">啟用</span>
-              <span class="text-mute" v-else>未啟用</span>
-            </td>
-            <td>
-                <div class="btn-group">
-                  <button class="btn btn-outline-primary btn-sm" @click="openModal(false, item)">編輯</button>
-                  <button class="btn btn-outline-danger btn-sm" @click="openDeleteArticleModal(item)">刪除</button>
-                </div>
-            </td>
-            </tr>
-        </tbody>
-    </table>
+    <div class="card p-3">
+      <table class="table">
+          <thead>
+              <tr>
+              <th width="120">標題</th>
+              <th width="120">敘述</th>
+              <th width="120">作者</th>
+              <th width="120">建立日期</th>
+              <th width="100">是否啟用</th>
+              <th width="120">編輯</th>
+              </tr>
+          </thead>
+          <tbody>
+              <tr v-for="(item, key) in articles" :key="key">
+              <td>{{ item.title }}</td>
+              <td>{{ item.description }}</td>
+              <td class="text-right">
+                  {{ item.author }}
+              </td>
+              <td class="text-right">
+                  {{ $filters.date(item.create_at) }}
+              </td>
+              <td>
+                <span class="text-success" v-if="item.isPublic">啟用</span>
+                <span class="text-mute" v-else>未啟用</span>
+              </td>
+              <td>
+                  <div class="btn-group">
+                    <button class="btn btn-outline-primary btn-sm" @click="openModal(false, item)">編輯</button>
+                    <button class="btn btn-outline-danger btn-sm" @click="openDeleteArticleModal(item)">刪除</button>
+                  </div>
+              </td>
+              </tr>
+          </tbody>
+      </table>
+    </div>
     <articleModal ref="articleModal" :article="tempArticle" @update-article="updateArticle"></articleModal>
     <deleteArticleModal ref="deleteArticleModal" @confirm-delete="deleteArticle"></deleteArticleModal>
 </template>

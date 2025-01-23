@@ -13,7 +13,10 @@
             </router-link>
             <router-link class="text-decoration-none" to="/cart">
                 <div class="user-cart">
-                    <div class="user-cart-name">購物車</div>
+                    <div class="user-cart-name">
+                      <font-awesome-icon :icon="['fas', 'cart-shopping']" />
+                      <span class="ms-1">購物車</span>
+                    </div>
                     <div class="user-cart-count">{{ cartCount }}</div>
                 </div>
             </router-link>

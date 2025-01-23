@@ -1,32 +1,54 @@
 <template>
     <Loading :active="isLoading"></Loading>
-    <nav class="navbar navbar-expand-lg bg-body-tertiary">
-        <div class="container-fluid">
-            <a class="navbar-brand" href="#">Dashboard</a>
-            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-                <span class="navbar-toggler-icon"></span>
-            </button>
-            <div class="collapse navbar-collapse" id="navbarNav">
-                <ul class="navbar-nav">
-                    <li class="nav-item">
-                        <router-link to="/dashboard/products" class="nav-link">產品</router-link>
-                    </li>
-                    <li class="nav-item">
-                        <router-link to="/dashboard/orders" class="nav-link">訂單</router-link>
-                    </li>
-                    <li class="nav-item">
-                        <router-link to="/dashboard/coupons" class="nav-link">優惠卷</router-link>
-                    </li>
-                    <li class="nav-item">
-                        <router-link to="/dashboard/articles" class="nav-link">文章</router-link>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="#" @click.prevent="logout">登出</a>
-                    </li>
-                </ul>
-            </div>
-        </div>
-    </nav>
+    <a href="/" class="d-flex align-items-center mb-3 mb-md-0 me-md-auto text-white text-decoration-none">
+      <img class="logo" src="../../public/image/oh_my_logo_white.svg" alt="">
+    </a>
+    <hr>
+    <ul class="nav nav-pills flex-column mb-auto">
+      <li class="nav-item">
+        <router-link to="/dashboard/products" class="nav-link active" aria-current="page">
+          <span class="icon">
+            <font-awesome-icon :icon="['fas', 'book']" />
+          </span>
+          <span class="title">商品管理</span>
+        </router-link>
+      </li>
+      <li>
+          <router-link to="/dashboard/orders" class="nav-link text-white">
+            <span class="icon">
+              <font-awesome-icon :icon="['fas', 'clipboard']" />
+            </span>
+            <span class="title">
+              訂單管理
+            </span>
+          </router-link>
+      </li>
+      <li>
+        <router-link to="/dashboard/coupons" class="nav-link text-white">
+          <span class="icon">
+            <font-awesome-icon :icon="['fas', 'dollar-sign']" />
+          </span>
+          <span class="title">優惠卷管理</span>
+        </router-link>
+      </li>
+      <li>
+        <router-link to="/dashboard/articles" class="nav-link text-white">
+          <span class="icon">
+            <font-awesome-icon :icon="['fas', 'pen']" />
+          </span>
+          <span class="title">文章管理</span>
+        </router-link>
+      </li>
+      <li>
+        <hr>
+        <a class="nav-link text-white" @click.prevent="logout">
+          <span class="icon">
+            <font-awesome-icon :icon="['fas', 'user']" />
+          </span>
+          <span class="title">帳號登出</span>
+        </a>
+      </li>
+    </ul>
 </template>
 
 <script>

@@ -195,10 +195,8 @@ html, body {
                 margin-bottom: 1rem;
             }
             .call-to-action{
-                // color: $white;
                 font-size: 1rem;
                 text-decoration: none;
-                // background-color: $blue;
                 display: block;
                 text-align: center;
                 padding: 1rem;
@@ -213,7 +211,7 @@ html, body {
                 &:hover {
                     color: var(--hover-text);
                     transform: translate(-0.25rem, -0.25rem);
-                    background: var(--hover-bg);
+                    background: $green;
                     box-shadow: 0.25rem 0.25rem var(--bg);
                 }
                 &:active {
@@ -314,10 +312,10 @@ html, body {
                     .tag{
                         font-size: .8rem;
                         font-weight: 400;
-                        border: .5px solid $blue;
+                        border: .5px solid $green;
                         border-radius: 50px;
-                        padding: .4rem;
-                        color: $blue;
+                        padding: .4rem .8rem;
+                        color: $green;
                     }
                 }
             }
@@ -406,7 +404,8 @@ html, body {
                     .subtitle{
                         font-size: .8rem;
                         font-weight: 500;
-                        border: .5px solid $blue;
+                        border: .5px solid $green;
+                        color: $green;
                         border-radius: 50px;
                         padding: .5rem;
                         margin-right: 1rem;
@@ -432,7 +431,8 @@ html, body {
                     .subtitle{
                         font-size: .8rem;
                         font-weight: 500;
-                        border: .5px solid $blue;
+                        border: .5px solid $green;
+                        color: $green;
                         border-radius: 50px;
                         padding: .5rem;
                         margin-right: 1rem;
@@ -461,7 +461,8 @@ html, body {
                     .subtitle{
                         font-size: .8rem;
                         font-weight: 500;
-                        border: .5px solid $blue;
+                        border: .5px solid $green;
+                        color: $green;
                         border-radius: 50px;
                         padding: .5rem;
                         margin-right: 1rem;
@@ -489,7 +490,7 @@ html, body {
         }
     }
     .banner{
-        margin-top: 3rem;
+        margin: 3rem 0;
         border: 1.5px solid $blue;
         padding: 1rem 1.5rem;
         display: flex;
@@ -516,16 +517,32 @@ html, body {
             }
         }
         .call-to-action{
-            color: $white;
             font-size: 1rem;
             text-decoration: none;
-            background-color: $blue;
             display: block;
             text-align: center;
-            padding: 1rem 3rem;
+            padding: 1rem;
+            --bg: #000000;
+            --hover-bg: #1b1b1b;
+            --hover-text: #ffffff;
+            color: #fff;
+            cursor: pointer;
+            border: 1px solid var(--bg);
+            background: var(--bg);
+            transition: 0.5s;
             @include tablet-portrait {
                 font-size: .9rem;
                 padding: 1rem 1.5rem;
+            }
+            &:hover {
+                color: var(--hover-text);
+                transform: translate(-0.25rem, -0.25rem);
+                background: $green;
+                box-shadow: 0.25rem 0.25rem var(--bg);
+            }
+            &:active {
+                transform: translate(0);
+                box-shadow: none;
             }
         }
     }

@@ -1,7 +1,7 @@
 .footer{
     margin-top: 8rem;
     width: 100%;
-    background-color: $blue;
+    background-color:#272727;
     color: $white;
     @include extralarge-desktop {
         margin-top:  8rem;
@@ -51,10 +51,12 @@
         }
     }
     .logo {
-        width: 180px;
+        width: 200px;
         height: 100%;
     }
-    .copy-right {
-        font-size: .8rem;
+    .copy-rights{
+        .copy-right {
+            font-size: .8rem;
+        }
     }
 }

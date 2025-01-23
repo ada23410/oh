@@ -1,10 +1,14 @@
 <!-- eslint-disable no-unused-vars -->
 <!-- eslint-disable vue/multi-word-component-names -->
 <template>
-      <NavbarDashboard></NavbarDashboard>
-      <div class="container-fluid mt-3 position-relative">
-        <ToastMessage></ToastMessage>
-        <router-view/>
+      <div class="wrapper d-flex w-100 align-items-stretch">
+        <div class="sidebar">
+          <NavbarDashboard></NavbarDashboard>
+        </div>
+        <div class="content w-100">
+          <ToastMessage></ToastMessage>
+          <router-view/>
+        </div>
       </div>
 </template>
 <script>

@@ -1,0 +1,25 @@
+.login{
+    width: 100vw;
+    height: 100vh;
+    background-color: $green;
+    .container {
+        padding-top: 10rem;
+        .row{
+            justify-content: center;
+            align-items: center;
+            .logo{
+                display: block;
+                width: 120px;
+                height: 100%;
+                margin: auto;
+            }
+            .title{
+                margin-top: 3rem;
+                color:$white
+            }
+            .sr-only{
+                color:$white
+            }
+        }
+    }
+}

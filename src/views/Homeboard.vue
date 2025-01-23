@@ -1,7 +1,7 @@
 <!-- eslint-disable vue/multi-word-component-names -->
 <template>
     <Navbar></Navbar>
-    <div class="mt-3 position-relative">
+    <div>
       <ToastMessage></ToastMessage>
       <router-view></router-view>
     </div>
