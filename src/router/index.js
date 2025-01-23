@@ -4,6 +4,7 @@ const routes = [
   {
     path: '/',
     redirect: '/home',
+    component: () => import('../views/Homeboard.vue'),
     children: [
       {
         path: 'home',
