@@ -3,64 +3,81 @@ import { createRouter, createWebHashHistory } from 'vue-router'
 const routes = [
   {
     path: '/',
-    component: () => import('../views/Homeboard.vue'),
+    redirect: '/home',
     children: [
       {
         path: 'home',
+        name: 'Home',
         component: () => import('../views/Home.vue')
       },
       {
         path: 'items',
+        name: 'ProductsList',
         component: () => import('../views/ProductsList.vue')
       },
       {
         path: 'product/:productId',
-        component: () => import('../views/ProductInfo.vue')
+        name: 'ProductInfo',
+        component: () => import('../views/ProductInfo.vue'),
+        props: true
       },
       {
         path: 'cart',
+        name: 'Cart',
         component: () => import('../views/Cart.vue')
       },
       {
         path: 'checkout/:orderId',
-        component: () => import('../views/Checkout.vue')
+        name: 'Checkout',
+        component: () => import('../views/Checkout.vue'),
+        props: true
       },
       {
         path: 'articles',
+        name: 'ArticlesList',
         component: () => import('../views/Topics.vue')
       },
       {
         path: 'articles/:articleId',
-        component: () => import('../views/Article.vue')
+        name: 'ArticleInfo',
+        component: () => import('../views/Article.vue'),
+        props: true
       },
       {
         path: 'about',
+        name: 'AboutUs',
         component: () => import('../views/AboutUs.vue')
       }
     ]
   },
   {
     path: '/login',
+    name: 'Login',
     component: () => import('../views/Login.vue')
   },
   {
     path: '/dashboard',
+    name: 'Dashboard',
     component: () => import('../views/Dashboard.vue'),
     children: [
       {
         path: 'products',
+        name: 'AdminProducts',
         component: () => import('../views/Products.vue')
       },
       {
         path: 'orders',
+        name: 'AdminOrders',
         component: () => import('../views/Orders.vue')
       },
       {
         path: 'coupons',
+        name: 'AdminCoupons',
         component: () => import('../views/Coupons.vue')
       },
       {
         path: 'articles',
+        name: 'AdminArticles',
         component: () => import('../views/ArticleList.vue')
       }
     ]
